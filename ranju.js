@@ -1,7 +1,3 @@
-/* ============================================================
-   RanjuUI — Interactive Component Logic
-   Version: 1.0.0 | License: MIT | Author: alps
-   ============================================================ */
 (function () {
   'use strict';
 
@@ -22,9 +18,6 @@
     return open;
   }
 
-  /* =====================
-     THEME
-     ===================== */
   var Ranju = window.Ranju = {};
 
   Ranju.theme = {
@@ -49,9 +42,6 @@
     }
   };
 
-  /* =====================
-     ACCORDION
-     ===================== */
   function initAccordion() {
     on(document, 'click', '.accordion-trigger', function () {
       var item = this.closest('.accordion-item');
@@ -68,9 +58,6 @@
     });
   }
 
-  /* =====================
-     ALERT DISMISS
-     ===================== */
   function initAlert() {
     on(document, 'click', '.alert-close', function () {
       var alert = this.closest('.alert');
@@ -83,9 +70,6 @@
     });
   }
 
-  /* =====================
-     COLLAPSIBLE
-     ===================== */
   function initCollapsible() {
     on(document, 'click', '.collapsible-trigger', function () {
       var col = this.closest('.collapsible');
@@ -93,9 +77,6 @@
     });
   }
 
-  /* =====================
-     DIALOG / SHEET / DRAWER
-     ===================== */
   function openDialog(id) {
     var overlay = document.getElementById(id);
     if (!overlay) return;
@@ -145,9 +126,6 @@
     });
   }
 
-  /* =====================
-     DROPDOWN
-     ===================== */
   function initDropdown() {
     on(document, 'click', '[data-dropdown-trigger]', function (e) {
       e.stopPropagation();
@@ -167,9 +145,6 @@
     });
   }
 
-  /* =====================
-     CONTEXT MENU
-     ===================== */
   function initContextMenu() {
     on(document, 'contextmenu', '[data-context-menu]', function (e) {
       e.preventDefault();
@@ -190,9 +165,6 @@
     });
   }
 
-  /* =====================
-     TABS
-     ===================== */
   function initTabs() {
     on(document, 'click', '.tabs-trigger', function () {
       var tabsRoot = this.closest('.tabs');
@@ -214,9 +186,6 @@
     });
   }
 
-  /* =====================
-     TOAST SYSTEM
-     ===================== */
   var toastDefaults = { duration: 4000, position: 'bottom-right' };
 
   function getContainer(pos) {
@@ -267,9 +236,6 @@
     setTimeout(function () { t.remove(); }, 200);
   }
 
-  /* =====================
-     TOOLTIP (JS enhanced)
-     ===================== */
   function initTooltip() {
     $$('[data-tooltip]').forEach(function (el) {
       el.addEventListener('mouseenter', function () {
@@ -291,9 +257,6 @@
     });
   }
 
-  /* =====================
-     POPOVER
-     ===================== */
   function initPopover() {
     on(document, 'click', '[data-popover-trigger]', function (e) {
       e.stopPropagation();
@@ -308,9 +271,6 @@
     });
   }
 
-  /* =====================
-     COMBOBOX
-     ===================== */
   function initCombobox() {
     on(document, 'focusin', '.combobox-input', function () {
       var cb = this.closest('.combobox');
@@ -344,9 +304,6 @@
     });
   }
 
-  /* =====================
-     COMMAND PALETTE
-     ===================== */
   Ranju.command = {
     open: function (id) {
       var el = document.getElementById(id);
@@ -400,9 +357,6 @@
     });
   }
 
-  /* =====================
-     CAROUSEL
-     ===================== */
   function initCarousel() {
     $$('.carousel').forEach(function (carousel) {
       var track = $('.carousel-track', carousel);
@@ -433,9 +387,6 @@
     });
   }
 
-  /* =====================
-     DATA TABLE SORT
-     ===================== */
   function initDataTable() {
     on(document, 'click', 'th[data-sortable]', function () {
       var table = this.closest('table');
@@ -463,9 +414,6 @@
     });
   }
 
-  /* =====================
-     CALENDAR
-     ===================== */
   Ranju.calendar = function (el, opts) {
     opts = opts || {};
     var today = new Date();
@@ -522,9 +470,6 @@
     render();
   };
 
-  /* =====================
-     SIDEBAR TOGGLE
-     ===================== */
   function initSidebar() {
     on(document, 'click', '[data-sidebar-toggle]', function () {
       var id = this.getAttribute('data-sidebar-toggle');
@@ -533,9 +478,6 @@
     });
   }
 
-  /* =====================
-     RESIZABLE
-     ===================== */
   function initResizable() {
     $$('.resizable-handle').forEach(function (handle) {
       var dragging = false;
@@ -575,9 +517,6 @@
     });
   }
 
-  /* =====================
-     TOGGLE
-     ===================== */
   function initToggle() {
     on(document, 'click', '.toggle', function () {
       var pressed = this.getAttribute('aria-pressed') === 'true';
@@ -596,9 +535,6 @@
     });
   }
 
-  /* =====================
-     INITIALIZE
-     ===================== */
   function init() {
     Ranju.theme.init();
     initAccordion();
@@ -629,3 +565,4 @@
     init();
   }
 })();
+

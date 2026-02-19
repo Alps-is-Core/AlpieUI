@@ -1,0 +1,31 @@
+{
+  "name": "@alps/ranjuui",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "alps",
+  "homepage": "https://alps-is-core.github.io/RanjuUI/",
+  "description": "Ultra-lightweight, zero dependency, semantic HTML/CSS/JS UI component library. 40+ components.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alps-is-Core/RanjuUI.git"
+  },
+  "keywords": [
+    "ui",
+    "components",
+    "component-library",
+    "css-framework",
+    "ui-components",
+    "vanilla-js",
+    "lightweight"
+  ],
+  "files": [
+    "ranju.css",
+    "ranju.js",
+    "src/css",
+    "src/js"
+  ],
+  "main": "ranju.js",
+  "style": "ranju.css",
+  "unpkg": "ranju.js",
+  "jsdelivr": "ranju.js"
+}

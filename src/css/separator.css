@@ -1,0 +1,28 @@
+.separator {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 1rem 0;
+}
+.separator-vertical {
+  border-top: none;
+  border-left: 1px solid var(--border);
+  height: auto;
+  align-self: stretch;
+  margin: 0 0.75rem;
+  display: inline-block;
+  min-height: 1rem;
+}
+.separator-label {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--muted-fg);
+  font-size: 0.8125rem;
+  margin: 1rem 0;
+}
+.separator-label::before, .separator-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}

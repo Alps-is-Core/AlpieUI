@@ -1,0 +1,28 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.5;
+  border-radius: 9999px;
+  background: var(--primary);
+  color: var(--primary-fg);
+  white-space: nowrap;
+  transition: background var(--transition);
+}
+.badge-secondary { background: var(--secondary); color: var(--secondary-fg); }
+.badge-outline { background: transparent; color: var(--fg); border: 1px solid var(--border); }
+.badge-destructive { background: var(--destructive); color: var(--destructive-fg); }
+.badge-success { background: var(--success); color: var(--success-fg); }
+.badge-warning { background: var(--warning); color: var(--warning-fg); }
+.badge-ghost { background: var(--muted); color: var(--muted-fg); }
+.badge-lg { padding: 0.25rem 0.75rem; font-size: 0.8125rem; }
+.badge-dot::before {
+  content: '';
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 9999px;
+  background: currentColor;
+  margin-right: 0.375rem;
+}

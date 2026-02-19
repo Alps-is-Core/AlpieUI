@@ -1,0 +1,30 @@
+.resizable {
+  position: relative;
+  display: flex;
+}
+.resizable-panel {
+  overflow: auto;
+  flex: 1;
+}
+.resizable-handle {
+  width: 4px;
+  background: var(--border);
+  cursor: col-resize;
+  flex-shrink: 0;
+  transition: background var(--transition);
+  position: relative;
+}
+.resizable-handle:hover, .resizable-handle:active {
+  background: var(--primary);
+}
+.resizable-handle::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+}
+.resizable-vertical { flex-direction: column; }
+.resizable-vertical .resizable-handle {
+  height: 4px;
+  width: auto;
+  cursor: row-resize;
+}

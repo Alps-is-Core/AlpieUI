@@ -1,0 +1,41 @@
+.truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.opacity-50 { opacity: 0.5; }
+.opacity-75 { opacity: 0.75; }
+.pointer-events-none { pointer-events: none; }
+.cursor-pointer { cursor: pointer; }
+.select-none { user-select: none; }
+.transition { transition: all var(--transition); }
+.animate-fade-in { animation: fade-in 0.2s ease-out; }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+.animate-slide-up { animation: slide-up 0.2s ease-out; }
+@keyframes slide-up { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+.animate-slide-down { animation: slide-down 0.2s ease-out; }
+@keyframes slide-down { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+.animate-scale-in { animation: scale-in 0.2s ease-out; }
+@keyframes scale-in { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+.animate-pulse { animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+.item-group {
+  display: flex;
+  flex-direction: column;
+}
+.item-group-horizontal { flex-direction: row; flex-wrap: wrap; }
+.item-group > * + * { border-top: 1px solid var(--border); }
+.item-group-horizontal > * + * { border-top: none; border-left: 1px solid var(--border); }
+.item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  transition: background var(--transition);
+}
+.item-clickable { cursor: pointer; }
+.item-clickable:hover { background: var(--muted); }
+.item-icon { flex-shrink: 0; width: 1.25rem; height: 1.25rem; color: var(--muted-fg); }
+.item-content { flex: 1; min-width: 0; }
+.item-title { font-weight: 500; font-size: 0.9375rem; }
+.item-description { font-size: 0.8125rem; color: var(--muted-fg); }
+.item-action { flex-shrink: 0; }

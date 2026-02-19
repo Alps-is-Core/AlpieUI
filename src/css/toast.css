@@ -1,0 +1,55 @@
+.toast-container {
+  position: fixed;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  pointer-events: none;
+  max-width: 420px;
+  width: 100%;
+}
+.toast-container.top-right { top: 1rem; right: 1rem; }
+.toast-container.top-left { top: 1rem; left: 1rem; }
+.toast-container.bottom-right { bottom: 1rem; right: 1rem; }
+.toast-container.bottom-left { bottom: 1rem; left: 1rem; }
+.toast-container.top-center { top: 1rem; left: 50%; transform: translateX(-50%); }
+.toast-container.bottom-center { bottom: 1rem; left: 50%; transform: translateX(-50%); }
+.toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  pointer-events: auto;
+  animation: toast-in 0.3s ease-out forwards;
+  font-size: 0.875rem;
+}
+.toast-leaving { animation: toast-out 0.2s ease-in forwards; }
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(-8px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes toast-out {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to { opacity: 0; transform: translateY(-8px) scale(0.96); }
+}
+.toast-icon { flex-shrink: 0; width: 1.25rem; height: 1.25rem; margin-top: 0.1rem; }
+.toast-content { flex: 1; min-width: 0; }
+.toast-title { font-weight: 600; margin-bottom: 0.125rem; }
+.toast-description { color: var(--muted-fg); font-size: 0.8125rem; }
+.toast-close {
+  background: none; border: none; color: var(--muted-fg);
+  cursor: pointer; padding: 0.25rem; flex-shrink: 0;
+  border-radius: var(--radius-sm); transition: color var(--transition);
+  line-height: 1; font-size: 1.125rem;
+}
+.toast-close:hover { color: var(--fg); }
+.toast-success { border-color: var(--success); }
+.toast-success .toast-icon { color: var(--success); }
+.toast-destructive { border-color: var(--destructive); }
+.toast-destructive .toast-icon { color: var(--destructive); }
+.toast-warning { border-color: var(--warning); }
+.toast-warning .toast-icon { color: var(--warning); }

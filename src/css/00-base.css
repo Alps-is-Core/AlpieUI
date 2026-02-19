@@ -1,0 +1,103 @@
+/* RanjuUI - Base & Reset */
+:root {
+  --bg: #ffffff;
+  --fg: #09090b;
+  --primary: #2563eb;
+  --primary-fg: #ffffff;
+  --primary-hover: #1d4ed8;
+  --secondary: #f4f4f5;
+  --secondary-fg: #18181b;
+  --secondary-hover: #e4e4e7;
+  --muted: #f4f4f5;
+  --muted-fg: #71717a;
+  --accent: #f0f4ff;
+  --accent-fg: #2563eb;
+  --destructive: #ef4444;
+  --destructive-fg: #ffffff;
+  --destructive-hover: #dc2626;
+  --warning: #f59e0b;
+  --warning-fg: #ffffff;
+  --success: #10b981;
+  --success-fg: #ffffff;
+  --info: #3b82f6;
+  --info-fg: #ffffff;
+  --border: #e4e4e7;
+  --input: #e4e4e7;
+  --ring: #2563eb;
+  --radius: 0.5rem;
+  --radius-sm: 0.375rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --shadow: 0 1px 3px rgba(0,0,0,.1), 0 1px 2px rgba(0,0,0,.06);
+  --shadow-md: 0 4px 6px rgba(0,0,0,.07), 0 2px 4px rgba(0,0,0,.06);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,.1), 0 4px 6px rgba(0,0,0,.05);
+  --shadow-xl: 0 20px 25px rgba(0,0,0,.1), 0 8px 10px rgba(0,0,0,.04);
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
+  --transition: 150ms cubic-bezier(.4,0,.2,1);
+  --transition-slow: 300ms cubic-bezier(.4,0,.2,1);
+  --overlay: rgba(0,0,0,.5);
+  --scrollbar: #d4d4d8;
+  --scrollbar-hover: #a1a1aa;
+  --skeleton-from: #e4e4e7;
+  --skeleton-to: #f4f4f5;
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --bg: #09090b;
+  --fg: #fafafa;
+  --primary: #3b82f6;
+  --primary-fg: #ffffff;
+  --primary-hover: #60a5fa;
+  --secondary: #27272a;
+  --secondary-fg: #fafafa;
+  --secondary-hover: #3f3f46;
+  --muted: #27272a;
+  --muted-fg: #a1a1aa;
+  --accent: #1e293b;
+  --accent-fg: #60a5fa;
+  --destructive: #dc2626;
+  --destructive-fg: #fafafa;
+  --destructive-hover: #ef4444;
+  --warning: #d97706;
+  --warning-fg: #ffffff;
+  --success: #059669;
+  --success-fg: #ffffff;
+  --info: #2563eb;
+  --info-fg: #ffffff;
+  --border: #27272a;
+  --input: #27272a;
+  --ring: #3b82f6;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.3);
+  --shadow: 0 1px 3px rgba(0,0,0,.4), 0 1px 2px rgba(0,0,0,.3);
+  --shadow-md: 0 4px 6px rgba(0,0,0,.4), 0 2px 4px rgba(0,0,0,.3);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,.5), 0 4px 6px rgba(0,0,0,.3);
+  --shadow-xl: 0 20px 25px rgba(0,0,0,.5), 0 8px 10px rgba(0,0,0,.3);
+  --overlay: rgba(0,0,0,.7);
+  --scrollbar: #3f3f46;
+  --scrollbar-hover: #52525b;
+  --skeleton-from: #27272a;
+  --skeleton-to: #3f3f46;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; tab-size: 4; scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--fg);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+img, svg, video, canvas, audio, iframe, embed, object { display: block; max-width: 100%; }
+a { color: var(--primary); text-decoration: none; transition: color var(--transition); }
+a:hover { color: var(--primary-hover); text-decoration: underline; }
+hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+::selection { background: var(--primary); color: var(--primary-fg); }
+:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; border-radius: var(--radius-sm); }
+[hidden] { display: none !important; }
