@@ -1,148 +1,199 @@
-<div align="center">
+# RanjuUI
 
-# △ RanjuUI
+> Semantic, lightweight, zero dependencies. ~54KB CSS + ~21KB JS.
 
-**The last UI library you'll ever need.**
+RanjuUI is an ultra-lightweight HTML + CSS + JS UI component library with zero dependencies. No framework, no build tools, no complexity. Just include two files and start building.
 
-A ridiculously lightweight, zero-dependency component library built with nothing but HTML, CSS, and a sprinkle of vanilla JavaScript. No React. No Vue. No build step. No nonsense.
+40+ production-ready components styled with CSS custom properties, dark mode support, and responsive design out of the box. Semantic HTML and ARIA attributes throughout.
 
-[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Components](https://img.shields.io/badge/Components-40%2B-green.svg)](#components)
-[![Dependencies](https://img.shields.io/badge/Dependencies-0-orange.svg)](#)
-[![Size](https://img.shields.io/badge/Size-~22KB-purple.svg)](#)
-
-[**Live Demo & Docs →**](https://alps-is-core.github.io/RanjuUI/)
-
-</div>
+See live demo and docs at [**alps-is-core.github.io/RanjuUI**](https://alps-is-core.github.io/RanjuUI/)
 
 ---
 
-## Why RanjuUI?
+## Install
 
-Every modern UI library wants you to install 200MB of node_modules, learn a framework, configure a bundler, and sacrifice your firstborn to the JavaScript gods.
+### CDN
 
-**RanjuUI says no.**
+```html
+<link rel="stylesheet" href="https://alps-is-core.github.io/RanjuUI/ranju.css">
+<script src="https://alps-is-core.github.io/RanjuUI/ranju.js" defer></script>
+```
 
-Two files. Drop them in. You're done. Every component you actually need — from accordions to toasts, calendars to command palettes — styled beautifully out of the box with dark mode, accessibility, and responsive design baked in.
+### Download
 
-| | RanjuUI | The Other Guys |
-|---|---------|---------------|
-| **Install** | 2 files, 1 second | `npm install` → 5 minutes, 847 packages |
-| **Bundle size** | ~22 KB total | 200+ KB minimum |
-| **Dependencies** | 0 | 37 (and counting) |
-| **Build step** | None | Webpack/Vite/Turbopack/??? |
-| **Framework lock-in** | None | Total |
-| **Works in 2030** | Yes | Probably deprecated |
-
-## Quick Start
+Download `ranju.css` and `ranju.js` from this repo and drop them into your project:
 
 ```html
 <link rel="stylesheet" href="ranju.css">
 <script src="ranju.js" defer></script>
 ```
 
-That's it.  No `npm install`. No `package.json`. No config files. No CLI. No plugins. No loaders. Just works.
+### npm
 
-## What's Inside
-
-**40+ production-ready components** covering everything a modern web app needs:
-
-### Layout & Foundation
-`Typography` · `Grid` · `Container` · `Flex Utilities` · `Spacing` · `Aspect Ratio` · `Separator` · `Scroll Area`
-
-### Data Display
-`Avatar` · `Badge` · `Card` · `Data Table` · `Empty State` · `Kbd` · `Skeleton` · `Meter` · `Progress` · `Spinner`
-
-### Forms & Input
-`Button` (6 variants, 4 sizes) · `Input` · `Textarea` · `Checkbox` · `Radio` · `Switch` · `Slider` · `Toggle` · `Combobox` · `Select` · `Label` · `Input Group`
-
-### Navigation
-`Breadcrumb` · `Menubar` · `Navbar` · `Pagination` · `Sidebar` · `Tabs`
-
-### Overlays & Feedback
-`Accordion` · `Alert` · `Calendar` · `Carousel` · `Collapsible` · `Command Palette` · `Context Menu` · `Dialog` · `Drawer` · `Dropdown` · `Hover Card` · `Popover` · `Sheet` · `Toast` · `Tooltip`
-
-### Utilities
-`Animations` · `Shadows` · `Responsive Helpers` · `Item Group` · `Print Styles`
-
-## Dark Mode
-
-RanjuUI ships with a complete dark theme that auto-detects your system preference and remembers the user's choice.
-
-```js
-Ranju.theme.toggle();       // flip between light & dark
-Ranju.theme.set('dark');    // force dark mode
-Ranju.theme.current();      // returns 'light' or 'dark'
+```bash
+npm install @alps/ranjuui
 ```
 
-Or just set `data-theme="dark"` on your `<html>` tag. Done.
+## Usage
+
+Components use plain HTML with CSS classes. No JavaScript configuration needed for most components:
+
+```html
+<!-- Button variants -->
+<button class="btn">Primary</button>
+<button class="btn btn-outline">Outline</button>
+<button class="btn btn-destructive">Delete</button>
+
+<!-- Card -->
+<div class="card">
+  <div class="card-header">
+    <div class="card-title">Title</div>
+    <div class="card-description">Description</div>
+  </div>
+  <div class="card-content">Content here</div>
+  <div class="card-footer">
+    <button class="btn btn-sm">Action</button>
+  </div>
+</div>
+
+<!-- Alert -->
+<div class="alert alert-success">
+  <div class="alert-content">
+    <div class="alert-title">Done</div>
+    <div class="alert-description">Operation completed.</div>
+  </div>
+</div>
+
+<!-- Tabs -->
+<div class="tabs">
+  <div class="tabs-list">
+    <button class="tabs-trigger active" data-tab="one">Tab 1</button>
+    <button class="tabs-trigger" data-tab="two">Tab 2</button>
+  </div>
+  <div class="tab-panel active" data-tab-panel="one">Content 1</div>
+  <div class="tab-panel" data-tab-panel="two">Content 2</div>
+</div>
+
+<!-- Dialog -->
+<button class="btn" data-dialog-open="my-dialog">Open</button>
+<div class="dialog-overlay" id="my-dialog" data-state="closed">
+  <div class="dialog">
+    <div class="dialog-header">
+      <div class="dialog-title">Title</div>
+    </div>
+    <div class="dialog-body">Content</div>
+    <div class="dialog-footer">
+      <button class="btn" data-dialog-close>Close</button>
+    </div>
+  </div>
+</div>
+```
 
 ## JavaScript API
 
-Minimal, powerful, no ceremony:
+Interactive components are auto-initialized. A minimal JS API is exposed for programmatic control:
 
 ```js
+// Theme
+Ranju.theme.toggle()        // switch light/dark
+Ranju.theme.set('dark')     // force dark
+Ranju.theme.current()       // returns 'light' or 'dark'
+
 // Toast notifications
 Ranju.toast({
-  title: 'Deployed!',
-  description: 'Your site is live.',
-  variant: 'success',
-  position: 'bottom-right'
-});
+  title: 'Saved',
+  description: 'Changes saved.',
+  variant: 'success',       // 'success' | 'destructive' | 'warning'
+  position: 'bottom-right'  // top-right, top-left, bottom-left, etc.
+})
 
-// Dialogs
-Ranju.dialog.open('my-dialog');
-Ranju.dialog.close('my-dialog');
+// Dialog
+Ranju.dialog.open('my-dialog')
+Ranju.dialog.close('my-dialog')
 
 // Command palette (Ctrl+K built-in)
-Ranju.command.open('cmd');
+Ranju.command.open('cmd')
+Ranju.command.close('cmd')
 
 // Calendar
-Ranju.calendar(document.querySelector('.calendar'), {
-  onSelect: (date) => console.log(date)
-});
+Ranju.calendar(element, {
+  onSelect: function(date) { console.log(date) }
+})
 ```
+
+## Dark Mode
+
+Auto-detects system preference. Saved to localStorage. Toggle with:
+
+```html
+<html data-theme="dark">
+```
+
+Or via JS: `Ranju.theme.toggle()`
 
 ## Customization
 
-Override CSS custom properties to match your brand in seconds:
+Override CSS custom properties:
 
 ```css
 :root {
   --primary: #8b5cf6;
   --primary-fg: #ffffff;
-  --primary-hover: #7c3aed;
   --radius: 0.75rem;
   --font-sans: 'Your Font', system-ui, sans-serif;
 }
 ```
 
-Every color, shadow, radius, font, and transition is a CSS variable. Change one line, transform everything.
+## Components
+
+**Layout:** Typography, Grid, Container, Flex Utilities, Spacing, Aspect Ratio, Separator, Scroll Area
+
+**Data Display:** Avatar, Badge, Card, Data Table, Empty State, Kbd, Skeleton, Meter, Progress, Spinner
+
+**Forms:** Button, Input, Textarea, Checkbox, Radio, Switch, Slider, Toggle, Combobox, Select, Label
+
+**Navigation:** Breadcrumb, Menubar, Navbar, Pagination, Sidebar, Tabs
+
+**Overlays:** Accordion, Alert, Calendar, Carousel, Collapsible, Command Palette, Context Menu, Dialog, Drawer, Dropdown, Hover Card, Popover, Sheet, Toast, Tooltip
+
+## Individual Components
+
+Each component is available as a standalone file in `src/css/` and `src/js/`:
+
+```
+src/css/button.css      # just button styles
+src/css/dialog.css      # just dialog/sheet/drawer
+src/js/toast.js         # just toast logic
+```
+
+Import only what you need, or use the bundled `ranju.css` + `ranju.js` for everything.
+
+## Build
+
+Concatenate source files into the bundle:
+
+```bash
+make dist
+```
+
+Requires `cat` (unix) or equivalent. See `Makefile` for the file order.
+
+## Project Structure
+
+```
+src/css/          42 individual component CSS files
+src/js/           20 individual component JS files
+ranju.css         concatenated CSS bundle
+ranju.js          concatenated JS bundle
+index.html        documentation & live demo
+Makefile          build system
+package.json      npm package config
+```
 
 ## Browser Support
 
-Chrome · Firefox · Safari · Edge — all modern browsers. Uses standard CSS and ES5 JavaScript. No polyfills needed.
-
-## Philosophy
-
-If the browser already has a native element for it, RanjuUI uses it. No reinventing `<button>`. No virtual DOM. No abstraction layers. Just semantic HTML enhanced with clean CSS and the minimum JavaScript required to make interactive components work.
-
-The result? A library that's fast, accessible, and will still work perfectly in 10 years.
-
-## Contributing
-
-Found a bug? Have an idea? PRs and issues are welcome.
+Chrome, Firefox, Safari, Edge — all modern browsers. Standard CSS and ES5 JavaScript.
 
 ## License
 
-[MIT](LICENSE) — do whatever you want with it.
-
----
-
-<div align="center">
-
-**Built by [alps](https://github.com/Alps-is-Core)**
-
-*No frameworks were harmed in the making of this library.*
-
-</div>
+[MIT](LICENSE)
