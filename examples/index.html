@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Examples — RanjuUI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../ranju.css">
+  <style>
+    body { min-height: 100vh; display: flex; flex-direction: column; }
+    .ex-header {
+      padding: 1rem 1.5rem; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 10;
+      background: color-mix(in srgb, var(--bg) 85%, transparent);
+      backdrop-filter: blur(12px);
+    }
+    .ex-content { flex: 1; max-width: 860px; margin: 0 auto; padding: 3rem 1.5rem; width: 100%; }
+    .ex-content h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 0.5rem; }
+    .ex-content > p { color: var(--muted-fg); margin-bottom: 2.5rem; }
+    .example-card { transition: box-shadow .2s, transform .2s; }
+    .example-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .example-thumb {
+      height: 200px; background: var(--muted); border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem; color: var(--muted-fg); overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <header class="ex-header">
+    <a href="../index.html" style="text-decoration:none;color:var(--fg)" class="flex items-center gap-2">
+      <span style="color:var(--primary);font-size:1.25rem">&#9650;</span>
+      <span class="font-bold">RanjuUI</span>
+      <span class="text-muted text-sm">/ Examples</span>
+    </a>
+    <div class="flex gap-2 items-center">
+      <a href="../index.html" class="btn btn-ghost btn-sm">Docs</a>
+      <button class="btn btn-ghost btn-sm btn-icon" onclick="Ranju.theme.toggle();document.getElementById('ti').textContent=Ranju.theme.current()==='dark'?'\u2600':'\u263E'" aria-label="Theme">
+        <span id="ti">&#9790;</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="ex-content">
+    <h1>Examples</h1>
+    <p>Real-world pages built entirely with RanjuUI components. No extra CSS frameworks, no JavaScript libraries — just RanjuUI.</p>
+
+    <div class="grid grid-cols-2 gap-6">
+      <a href="saas-landing.html" class="card example-card" style="text-decoration:none;color:inherit">
+        <div class="example-thumb" style="background:linear-gradient(135deg,var(--primary),#a855f7);color:white;font-size:1rem;font-weight:600">
+          <div style="text-align:center">
+            <div style="font-size:2.5rem;margin-bottom:0.5rem">&#128640;</div>
+            SaaS Landing Page
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="card-title">SaaS Landing Page</div>
+          <p class="text-sm text-muted mt-1">Hero, features grid, pricing cards, testimonials, FAQ accordion, CTA — a full marketing page.</p>
+          <div class="flex gap-2 mt-3 flex-wrap">
+            <span class="badge badge-ghost text-xs">Navbar</span>
+            <span class="badge badge-ghost text-xs">Card</span>
+            <span class="badge badge-ghost text-xs">Badge</span>
+            <span class="badge badge-ghost text-xs">Accordion</span>
+            <span class="badge badge-ghost text-xs">Button</span>
+            <span class="badge badge-ghost text-xs">Grid</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="dashboard.html" class="card example-card" style="text-decoration:none;color:inherit">
+        <div class="example-thumb" style="background:linear-gradient(135deg,#059669,#0ea5e9);color:white;font-size:1rem;font-weight:600">
+          <div style="text-align:center">
+            <div style="font-size:2.5rem;margin-bottom:0.5rem">&#128202;</div>
+            Dashboard App
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="card-title">Dashboard App</div>
+          <p class="text-sm text-muted mt-1">Sidebar navigation, stat cards, data table, tabs, command palette, toasts, dialogs — a full admin UI.</p>
+          <div class="flex gap-2 mt-3 flex-wrap">
+            <span class="badge badge-ghost text-xs">Sidebar</span>
+            <span class="badge badge-ghost text-xs">Table</span>
+            <span class="badge badge-ghost text-xs">Tabs</span>
+            <span class="badge badge-ghost text-xs">Dialog</span>
+            <span class="badge badge-ghost text-xs">Toast</span>
+            <span class="badge badge-ghost text-xs">Command</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <script src="../ranju.js"></script>
+  <script>
+    document.getElementById('ti').textContent = Ranju.theme.current() === 'dark' ? '\u2600' : '\u263E';
+  </script>
+</body>
+</html>

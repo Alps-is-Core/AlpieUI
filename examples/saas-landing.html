@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Launchpad — SaaS Landing Page Example | RanjuUI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../ranju.css">
+  <style>
+    body { overflow-x: hidden; }
+    .landing-nav {
+      position: sticky; top: 0; z-index: 50;
+      background: color-mix(in srgb, var(--bg) 85%, transparent);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .landing-nav .container { display: flex; align-items: center; justify-content: space-between; padding-block: 0.75rem; }
+    .landing-nav-links { display: flex; align-items: center; gap: 0.25rem; list-style: none; }
+    .landing-nav-links a { padding: 0.375rem 0.75rem; font-size: 0.875rem; color: var(--muted-fg); text-decoration: none; border-radius: var(--radius-sm); transition: color .15s, background .15s; }
+    .landing-nav-links a:hover { color: var(--fg); background: var(--muted); }
+    .hero { text-align: center; padding: 5rem 1rem 4rem; }
+    .hero h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1.1; max-width: 720px; margin: 0 auto 1.25rem; }
+    .hero h1 span { background: linear-gradient(135deg, var(--primary), #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero p { color: var(--muted-fg); font-size: 1.125rem; max-width: 540px; margin: 0 auto 2rem; line-height: 1.7; }
+    .hero-actions { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+    .hero-badges { display: flex; gap: 0.5rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap; }
+    .social-proof { text-align: center; padding: 2.5rem 1rem; border-bottom: 1px solid var(--border); }
+    .social-proof p { color: var(--muted-fg); font-size: 0.875rem; margin-bottom: 1rem; }
+    .logo-row { display: flex; align-items: center; justify-content: center; gap: 2.5rem; flex-wrap: wrap; opacity: 0.4; }
+    .logo-row span { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--fg); }
+    .features { padding: 5rem 1rem; }
+    .features-header { text-align: center; margin-bottom: 3rem; }
+    .features-header h2 { font-size: 2rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 0.75rem; }
+    .features-header p { color: var(--muted-fg); font-size: 1rem; max-width: 520px; margin: 0 auto; }
+    .pricing { padding: 5rem 1rem; background: var(--muted); }
+    .pricing-header { text-align: center; margin-bottom: 3rem; }
+    .pricing-header h2 { font-size: 2rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 0.75rem; }
+    .pricing-header p { color: var(--muted-fg); font-size: 1rem; }
+    .price { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.04em; }
+    .price span { font-size: 0.875rem; font-weight: 400; color: var(--muted-fg); }
+    .testimonials { padding: 5rem 1rem; }
+    .testimonials-header { text-align: center; margin-bottom: 3rem; }
+    .testimonials-header h2 { font-size: 2rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 0.75rem; }
+    .faq { padding: 5rem 1rem; background: var(--muted); }
+    .faq-header { text-align: center; margin-bottom: 3rem; }
+    .faq-header h2 { font-size: 2rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 0.75rem; }
+    .faq-header p { color: var(--muted-fg); }
+    .cta-section { text-align: center; padding: 5rem 1rem; border-top: 1px solid var(--border); }
+    .cta-section h2 { font-size: 2rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 0.75rem; }
+    .cta-section p { color: var(--muted-fg); font-size: 1rem; margin-bottom: 2rem; max-width: 480px; margin-inline: auto; }
+    .landing-footer { padding: 3rem 1rem; border-top: 1px solid var(--border); }
+    .landing-footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-links { display: flex; gap: 1.5rem; list-style: none; }
+    .footer-links a { font-size: 0.8125rem; color: var(--muted-fg); text-decoration: none; }
+    .footer-links a:hover { color: var(--fg); }
+    .popular-badge { position: absolute; top: -0.75rem; right: 1rem; }
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.25rem; }
+      .hero p { font-size: 1rem; }
+      .landing-nav-links { display: none; }
+      .logo-row { gap: 1.5rem; }
+      .logo-row span { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="landing-nav">
+    <div class="container">
+      <a href="#" class="font-bold text-lg" style="text-decoration:none;color:var(--fg)">
+        <span style="color:var(--primary)">&#9650;</span> Launchpad
+      </a>
+      <ul class="landing-nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <div class="flex gap-2 items-center">
+        <button class="btn btn-ghost btn-sm" onclick="Ranju.theme.toggle();updateIcon()">
+          <span id="t-icon">&#9790;</span>
+        </button>
+        <a href="#" class="btn btn-outline btn-sm">Log In</a>
+        <a href="#" class="btn btn-sm">Get Started</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="container">
+      <span class="badge badge-outline" style="margin-bottom:1.5rem">&#10024; Now in public beta</span>
+      <h1>Ship products <span>10x faster</span> with AI-powered workflows</h1>
+      <p>Launchpad automates your entire deployment pipeline. From code push to production in seconds, not hours.</p>
+      <div class="hero-actions">
+        <a href="#" class="btn btn-lg">Start Free Trial</a>
+        <a href="#" class="btn btn-outline btn-lg">Watch Demo &rarr;</a>
+      </div>
+      <div class="hero-badges">
+        <span class="badge badge-ghost">&#10003; No credit card</span>
+        <span class="badge badge-ghost">&#10003; 14-day free trial</span>
+        <span class="badge badge-ghost">&#10003; Cancel anytime</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SOCIAL PROOF ===== -->
+  <div class="social-proof">
+    <p class="text-sm">Trusted by teams at</p>
+    <div class="logo-row">
+      <span>Stripe</span>
+      <span>Vercel</span>
+      <span>Linear</span>
+      <span>Notion</span>
+      <span>Figma</span>
+      <span>Railway</span>
+    </div>
+  </div>
+
+  <!-- ===== FEATURES ===== -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="features-header">
+        <span class="badge mb-4">Features</span>
+        <h2>Everything you need to ship fast</h2>
+        <p>A complete toolkit that replaces 6 different tools in your stack.</p>
+      </div>
+      <div class="grid grid-cols-3 gap-6">
+        <div class="card card-hover">
+          <div class="card-content">
+            <div class="avatar mb-4" style="background:color-mix(in srgb,var(--primary) 15%,transparent);color:var(--primary)">&#9889;</div>
+            <div class="card-title">Instant Deploys</div>
+            <p class="text-sm text-muted mt-2">Push to git and your app is live in under 10 seconds. Zero config required.</p>
+          </div>
+        </div>
+        <div class="card card-hover">
+          <div class="card-content">
+            <div class="avatar mb-4" style="background:color-mix(in srgb,var(--success) 15%,transparent);color:var(--success)">&#128274;</div>
+            <div class="card-title">Built-in Security</div>
+            <p class="text-sm text-muted mt-2">SSL certificates, DDoS protection, and secret management handled automatically.</p>
+          </div>
+        </div>
+        <div class="card card-hover">
+          <div class="card-content">
+            <div class="avatar mb-4" style="background:color-mix(in srgb,var(--warning) 15%,transparent);color:var(--warning)">&#128200;</div>
+            <div class="card-title">Real-time Analytics</div>
+            <p class="text-sm text-muted mt-2">Monitor performance, errors, and user behavior with zero-latency dashboards.</p>
+          </div>
+        </div>
+        <div class="card card-hover">
+          <div class="card-content">
+            <div class="avatar mb-4" style="background:color-mix(in srgb,var(--destructive) 15%,transparent);color:var(--destructive)">&#127758;</div>
+            <div class="card-title">Edge Network</div>
+            <p class="text-sm text-muted mt-2">Deploy to 50+ global edge locations. Your users get sub-50ms response times everywhere.</p>
+          </div>
+        </div>
+        <div class="card card-hover">
+          <div class="card-content">
+            <div class="avatar mb-4" style="background:color-mix(in srgb,var(--info) 15%,transparent);color:var(--info)">&#129302;</div>
+            <div class="card-title">AI Code Review</div>
+            <p class="text-sm text-muted mt-2">Automated PR reviews that catch bugs, security issues, and suggest improvements.</p>
+          </div>
+        </div>
+        <div class="card card-hover">
+          <div class="card-content">
+            <div class="avatar mb-4" style="background:color-mix(in srgb,var(--primary) 15%,transparent);color:var(--primary)">&#128101;</div>
+            <div class="card-title">Team Collaboration</div>
+            <p class="text-sm text-muted mt-2">Branch previews, review environments, and deploy approvals for your whole team.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PRICING ===== -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="pricing-header">
+        <span class="badge mb-4">Pricing</span>
+        <h2>Simple, transparent pricing</h2>
+        <p>No hidden fees. No surprises. Scale when you're ready.</p>
+      </div>
+      <div class="grid grid-cols-3 gap-6">
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Hobby</div>
+            <div class="card-description">For side projects and experiments.</div>
+          </div>
+          <div class="card-content">
+            <div class="price">$0<span>/mo</span></div>
+            <div class="separator my-4" style="margin:1rem 0"></div>
+            <div class="space-y-2">
+              <div class="flex items-center gap-2 text-sm"><span class="text-success">&#10003;</span> 3 projects</div>
+              <div class="flex items-center gap-2 text-sm"><span class="text-success">&#10003;</span> 100 GB bandwidth</div>
+              <div class="flex items-center gap-2 text-sm"><span class="text-success">&#10003;</span> Community support</div>
+              <div class="flex items-center gap-2 text-sm text-muted"><span>&#10005;</span> Custom domains</div>
+              <div class="flex items-center gap-2 text-sm text-muted"><span>&#10005;</span> Analytics</div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <a href="#" class="btn btn-outline w-full">Get Started</a>
+          </div>
+        </div>
+
+        <div class="card relative" style="border-color:var(--primary);box-shadow:0 0 0 1px var(--primary),var(--shadow-lg)">
+          <span class="badge popular-badge">Most Popular</span>
+          <div class="card-header">
+            <div class="card-title">Pro</div>
+            <div class="card-description">For growing teams and products.</div>
+          </div>
+          <div class="card-content">
+            <div class="price">$29<span>/mo</span></div>
+            <div class="separator" style="margin:1rem 0"></div>
+            <div class="space-y-2">
+              <div class="flex items-center gap-2 text-sm"><span class="text-success">&#10003;</span> Unlimited projects</div>
+              <div class="flex items-center gap-2 text-sm"><span class="text-success">&#10003;</span> 1 TB bandwidth</div>
+              <div class="flex items-center gap-2 text-sm"><span class="text-success">&#10003;</span> Priority support</div>
+              <div class="flex items-center gap-2 text-sm"><span class="text-success">&#10003;</span> Custom domains</div>
+              <div class="flex items-center gap-2 text-sm"><span class="text-success">&#10003;</span> Advanced analytics</div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <a href="#" class="btn w-full">Start Free Trial</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Enterprise</div>
+            <div class="card-description">For organizations at scale.</div>
+          </div>
+          <div class="card-content">
+            <div class="price">Custom</div>
+            <div class="separator" style="margin:1rem 0"></div>
+            <div class="space-y-2">
+              <div class="flex items-center gap-2 text-sm"><span class="text-success">&#10003;</span> Everything in Pro</div>
+              <div class="flex items-center gap-2 text-sm"><span class="text-success">&#10003;</span> SSO & SAML</div>
+              <div class="flex items-center gap-2 text-sm"><span class="text-success">&#10003;</span> 99.99% SLA</div>
+              <div class="flex items-center gap-2 text-sm"><span class="text-success">&#10003;</span> Dedicated support</div>
+              <div class="flex items-center gap-2 text-sm"><span class="text-success">&#10003;</span> Custom contracts</div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <a href="#" class="btn btn-outline w-full">Contact Sales</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="testimonials-header">
+        <span class="badge mb-4">Testimonials</span>
+        <h2>Loved by developers</h2>
+      </div>
+      <div class="grid grid-cols-3 gap-6">
+        <div class="card">
+          <div class="card-content">
+            <p class="text-sm mb-4" style="line-height:1.7">"Launchpad cut our deploy time from 20 minutes to 8 seconds. I'm not exaggerating. Our entire CI/CD pipeline is now two lines of config."</p>
+            <div class="flex items-center gap-3">
+              <div class="avatar" style="background:var(--primary);color:white">SK</div>
+              <div>
+                <div class="text-sm font-semibold">Sarah Kim</div>
+                <div class="text-xs text-muted">CTO at Flowbase</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-content">
+            <p class="text-sm mb-4" style="line-height:1.7">"We replaced Vercel + Datadog + PagerDuty with one tool. The analytics alone are worth the price. Plus, the team collaboration features are incredible."</p>
+            <div class="flex items-center gap-3">
+              <div class="avatar" style="background:var(--success);color:white">MR</div>
+              <div>
+                <div class="text-sm font-semibold">Marcus Rivera</div>
+                <div class="text-xs text-muted">Lead Engineer at Stackwise</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-content">
+            <p class="text-sm mb-4" style="line-height:1.7">"The edge network performance is unreal. Our TTFB dropped by 70% across all regions. Customers in Asia went from 2s load to 200ms."</p>
+            <div class="flex items-center gap-3">
+              <div class="avatar" style="background:var(--warning);color:white">EL</div>
+              <div>
+                <div class="text-sm font-semibold">Emma Liu</div>
+                <div class="text-xs text-muted">Founder at Nimbus</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="faq" id="faq">
+    <div class="container" style="max-width:680px">
+      <div class="faq-header">
+        <span class="badge mb-4">FAQ</span>
+        <h2>Frequently asked questions</h2>
+        <p>Can't find what you're looking for? <a href="#">Contact us</a>.</p>
+      </div>
+      <div class="accordion">
+        <div class="accordion-item" data-state="open">
+          <button class="accordion-trigger">How does the free trial work?</button>
+          <div class="accordion-content">
+            <div class="accordion-body">You get full access to all Pro features for 14 days. No credit card required. At the end of the trial, you can downgrade to Hobby or upgrade to Pro.</div>
+          </div>
+        </div>
+        <div class="accordion-item" data-state="closed">
+          <button class="accordion-trigger">Can I cancel my subscription anytime?</button>
+          <div class="accordion-content">
+            <div class="accordion-body">Yes. You can cancel from your dashboard at any time. Your account will remain active until the end of your billing period. No questions asked.</div>
+          </div>
+        </div>
+        <div class="accordion-item" data-state="closed">
+          <button class="accordion-trigger">Do you support monorepos?</button>
+          <div class="accordion-content">
+            <div class="accordion-body">Absolutely. Launchpad natively supports monorepos with automatic project detection, per-package deploys, and shared build caching across workspaces.</div>
+          </div>
+        </div>
+        <div class="accordion-item" data-state="closed">
+          <button class="accordion-trigger">What frameworks do you support?</button>
+          <div class="accordion-content">
+            <div class="accordion-body">Next.js, Nuxt, SvelteKit, Astro, Remix, Vite, and any static site generator. If it builds to HTML/JS/CSS, we can deploy it.</div>
+          </div>
+        </div>
+        <div class="accordion-item" data-state="closed">
+          <button class="accordion-trigger">Is there a self-hosted option?</button>
+          <div class="accordion-content">
+            <div class="accordion-body">Yes, our Enterprise plan includes a self-hosted option that runs in your own cloud infrastructure (AWS, GCP, or Azure) with full support.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Ready to ship faster?</h2>
+      <p>Join 5,000+ developers who deploy with confidence every day.</p>
+      <div class="flex gap-3 justify-center flex-wrap">
+        <a href="#" class="btn btn-lg">Start Free Trial</a>
+        <a href="#" class="btn btn-outline btn-lg">Talk to Sales</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="landing-footer">
+    <div class="container">
+      <div class="text-sm text-muted">&copy; 2026 Launchpad. All rights reserved.</div>
+      <ul class="footer-links">
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Terms</a></li>
+        <li><a href="#">Docs</a></li>
+        <li><a href="#">GitHub</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="../ranju.js"></script>
+  <script>
+    function updateIcon() {
+      document.getElementById('t-icon').textContent = Ranju.theme.current() === 'dark' ? '\u2600' : '\u263E';
+    }
+    updateIcon();
+  </script>
+</body>
+</html>

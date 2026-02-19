@@ -190,6 +190,15 @@ Makefile          build system
 package.json      npm package config
 ```
 
+## Examples
+
+Full pages built with RanjuUI — no extra frameworks, just these components:
+
+- **[SaaS Landing Page](https://alps-is-core.github.io/RanjuUI/examples/saas-landing.html)** — Hero, features grid, pricing cards, testimonials, FAQ accordion, CTA
+- **[Dashboard App](https://alps-is-core.github.io/RanjuUI/examples/dashboard.html)** — Sidebar, stat cards, data table, tabs, command palette, toasts, dialogs
+
+[View all examples →](https://alps-is-core.github.io/RanjuUI/examples/)
+
 ## Browser Support
 
 Chrome, Firefox, Safari, Edge — all modern browsers. Standard CSS and ES5 JavaScript.

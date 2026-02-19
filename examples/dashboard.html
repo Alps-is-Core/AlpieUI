@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — App Example | RanjuUI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../ranju.css">
+  <style>
+    body { display: flex; min-height: 100vh; background: var(--muted); }
+    .app-sidebar {
+      width: 260px; position: fixed; top: 0; left: 0; bottom: 0;
+      background: var(--bg); border-right: 1px solid var(--border);
+      display: flex; flex-direction: column; z-index: 40;
+      transition: transform .3s ease;
+    }
+    .app-sidebar-header { padding: 1rem 1.25rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 0.5rem; }
+    .app-sidebar-content { flex: 1; overflow-y: auto; padding: 0.5rem; }
+    .app-sidebar-footer { padding: 0.75rem; border-top: 1px solid var(--border); }
+    .app-main { flex: 1; margin-left: 260px; min-width: 0; }
+    .app-topbar {
+      position: sticky; top: 0; z-index: 30;
+      background: color-mix(in srgb, var(--bg) 90%, transparent);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.75rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    }
+    .app-topbar-left { display: flex; align-items: center; gap: 0.75rem; }
+    .app-topbar-right { display: flex; align-items: center; gap: 0.5rem; }
+    .app-content { padding: 1.5rem; }
+    .stat-card { display: flex; flex-direction: column; gap: 0.25rem; }
+    .stat-value { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.03em; }
+    .stat-label { font-size: 0.8125rem; color: var(--muted-fg); }
+    .stat-change { font-size: 0.75rem; font-weight: 500; }
+    .stat-up { color: var(--success); }
+    .stat-down { color: var(--destructive); }
+    .chart-placeholder {
+      height: 200px; border-radius: var(--radius); background: var(--muted);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted-fg); font-size: 0.875rem;
+      background-image: linear-gradient(135deg, transparent 40%, color-mix(in srgb, var(--primary) 8%, transparent) 60%, transparent 80%);
+    }
+    .mobile-menu-btn {
+      display: none; background: none; border: 1px solid var(--border);
+      border-radius: var(--radius-sm); width: 2.25rem; height: 2.25rem;
+      align-items: center; justify-content: center; cursor: pointer; color: var(--fg); font-size: 1.25rem;
+    }
+    .mobile-overlay { display: none; position: fixed; inset: 0; background: var(--overlay); z-index: 39; }
+    @media (max-width: 900px) {
+      .app-sidebar { transform: translateX(-100%); box-shadow: var(--shadow-xl); }
+      .app-sidebar.open { transform: translateX(0); }
+      .mobile-overlay.open { display: block; }
+      .mobile-menu-btn { display: flex; }
+      .app-main { margin-left: 0; }
+      .grid.grid-cols-4 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .grid.grid-cols-4 { grid-template-columns: 1fr; }
+      .app-content { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="mobile-overlay" id="mob-overlay" onclick="closeSidebar()"></div>
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="app-sidebar" id="app-sidebar">
+    <div class="app-sidebar-header">
+      <div class="avatar" style="width:1.75rem;height:1.75rem;font-size:.625rem;background:var(--primary);color:white">L</div>
+      <span class="font-semibold text-sm">Launchpad</span>
+    </div>
+    <div class="app-sidebar-content">
+      <div class="sidebar-label">Overview</div>
+      <a class="sidebar-item active" href="#" onclick="closeSidebar()">
+        <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/></svg>
+        <span class="sidebar-item-text">Dashboard</span>
+      </a>
+      <a class="sidebar-item" href="#" onclick="closeSidebar()">
+        <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z" clip-rule="evenodd"/></svg>
+        <span class="sidebar-item-text">Analytics</span>
+      </a>
+      <a class="sidebar-item" href="#" onclick="closeSidebar()">
+        <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/></svg>
+        <span class="sidebar-item-text">Projects</span>
+      </a>
+      <div class="sidebar-label">Management</div>
+      <a class="sidebar-item" href="#" onclick="closeSidebar()">
+        <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/></svg>
+        <span class="sidebar-item-text">Team</span>
+      </a>
+      <a class="sidebar-item" href="#" onclick="closeSidebar()">
+        <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/></svg>
+        <span class="sidebar-item-text">Settings</span>
+      </a>
+    </div>
+    <div class="app-sidebar-footer">
+      <div class="flex items-center gap-3 p-2">
+        <div class="avatar" style="width:2rem;height:2rem;font-size:.75rem;background:var(--primary);color:white">JD</div>
+        <div class="flex-1 min-w-0">
+          <div class="text-sm font-medium truncate">Jane Doe</div>
+          <div class="text-xs text-muted truncate">jane@example.com</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN ===== -->
+  <main class="app-main">
+    <header class="app-topbar">
+      <div class="app-topbar-left">
+        <button class="mobile-menu-btn" onclick="toggleSidebar()" aria-label="Menu">&#9776;</button>
+        <h1 class="text-lg font-semibold" style="margin:0">Dashboard</h1>
+      </div>
+      <div class="app-topbar-right">
+        <button class="btn btn-outline btn-sm" onclick="Ranju.command.open('cmd-demo')">
+          <span class="text-muted text-xs">Search...</span> &nbsp;<kbd>Ctrl+K</kbd>
+        </button>
+        <button class="btn btn-ghost btn-sm btn-icon" onclick="Ranju.theme.toggle();updateIcon()" aria-label="Theme">
+          <span id="t-icon">&#9790;</span>
+        </button>
+        <button class="btn btn-ghost btn-sm btn-icon" onclick="Ranju.toast({title:'3 new notifications',description:'You have unread messages.',variant:'info',position:'top-right'})" aria-label="Notifications">&#128276;</button>
+        <div class="dropdown" data-state="closed">
+          <div class="avatar" style="width:2rem;height:2rem;font-size:.75rem;background:var(--primary);color:white;cursor:pointer" data-dropdown-trigger>JD</div>
+          <ul class="dropdown-menu" style="right:0;left:auto">
+            <li class="dropdown-label">My Account</li>
+            <li class="dropdown-item">Profile</li>
+            <li class="dropdown-item">Settings</li>
+            <li class="dropdown-item">Billing</li>
+            <li class="dropdown-separator"></li>
+            <li class="dropdown-item" style="color:var(--destructive)">Log Out</li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <div class="app-content">
+
+      <!-- Stats Row -->
+      <div class="grid grid-cols-4 gap-4 mb-6">
+        <div class="card">
+          <div class="card-content stat-card">
+            <div class="stat-label">Total Revenue</div>
+            <div class="stat-value">$45,231</div>
+            <div class="stat-change stat-up">&#9650; 20.1% from last month</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-content stat-card">
+            <div class="stat-label">Subscriptions</div>
+            <div class="stat-value">+2,350</div>
+            <div class="stat-change stat-up">&#9650; 12.5% from last month</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-content stat-card">
+            <div class="stat-label">Active Users</div>
+            <div class="stat-value">18,472</div>
+            <div class="stat-change stat-up">&#9650; 8.2% from last month</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-content stat-card">
+            <div class="stat-label">Churn Rate</div>
+            <div class="stat-value">2.4%</div>
+            <div class="stat-change stat-down">&#9660; 0.3% from last month</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts & Activity -->
+      <div class="grid grid-cols-2 gap-4 mb-6">
+        <div class="card">
+          <div class="card-header">
+            <div class="flex justify-between items-center">
+              <div class="card-title">Revenue Overview</div>
+              <div class="toggle-group">
+                <button class="toggle active" aria-pressed="true" style="padding:.25rem .625rem;font-size:.75rem">Monthly</button>
+                <button class="toggle" aria-pressed="false" style="padding:.25rem .625rem;font-size:.75rem">Weekly</button>
+              </div>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="chart-placeholder">Revenue chart visualization</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Recent Activity</div>
+          </div>
+          <div class="card-content p-0">
+            <div class="item-group">
+              <div class="item">
+                <div class="avatar" style="width:2rem;height:2rem;font-size:.625rem;background:var(--success);color:white">&#10003;</div>
+                <div class="item-content">
+                  <div class="item-title text-sm">Deploy succeeded</div>
+                  <div class="item-description">frontend-app &middot; Production</div>
+                </div>
+                <span class="text-xs text-muted">2m ago</span>
+              </div>
+              <div class="item">
+                <div class="avatar" style="width:2rem;height:2rem;font-size:.625rem;background:var(--primary);color:white">PR</div>
+                <div class="item-content">
+                  <div class="item-title text-sm">PR merged</div>
+                  <div class="item-description">feat: add user onboarding flow</div>
+                </div>
+                <span class="text-xs text-muted">15m ago</span>
+              </div>
+              <div class="item">
+                <div class="avatar" style="width:2rem;height:2rem;font-size:.625rem;background:var(--warning);color:white">!</div>
+                <div class="item-content">
+                  <div class="item-title text-sm">High memory usage</div>
+                  <div class="item-description">api-server &middot; Staging</div>
+                </div>
+                <span class="text-xs text-muted">1h ago</span>
+              </div>
+              <div class="item">
+                <div class="avatar" style="width:2rem;height:2rem;font-size:.625rem;background:var(--info);color:white">+</div>
+                <div class="item-content">
+                  <div class="item-title text-sm">New team member</div>
+                  <div class="item-description">Alex joined the Engineering team</div>
+                </div>
+                <span class="text-xs text-muted">3h ago</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabs + Table -->
+      <div class="card">
+        <div class="card-content">
+          <div class="tabs">
+            <div class="tabs-list">
+              <button class="tabs-trigger active" aria-selected="true" data-tab="deploys">Deployments</button>
+              <button class="tabs-trigger" data-tab="members">Team Members</button>
+            </div>
+            <div class="tab-panel active" data-tab-panel="deploys">
+              <div class="table-wrapper mt-4" style="border:none">
+                <table class="table-hover">
+                  <thead>
+                    <tr>
+                      <th data-sortable>Project</th>
+                      <th data-sortable>Status</th>
+                      <th data-sortable>Branch</th>
+                      <th data-sortable>Duration</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="font-medium">frontend-app</td>
+                      <td><span class="badge badge-success badge-dot">Deployed</span></td>
+                      <td class="font-mono text-sm">main</td>
+                      <td>8s</td>
+                      <td>
+                        <button class="btn btn-ghost btn-sm" onclick="Ranju.dialog.open('deploy-dialog')">View</button>
+                        <button class="btn btn-ghost btn-sm" onclick="Ranju.toast({title:'Redeploying...',description:'frontend-app is rebuilding.',position:'bottom-right'})">Redeploy</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="font-medium">api-server</td>
+                      <td><span class="badge badge-success badge-dot">Deployed</span></td>
+                      <td class="font-mono text-sm">main</td>
+                      <td>12s</td>
+                      <td>
+                        <button class="btn btn-ghost btn-sm">View</button>
+                        <button class="btn btn-ghost btn-sm">Redeploy</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="font-medium">docs-site</td>
+                      <td><span class="badge badge-warning badge-dot">Building</span></td>
+                      <td class="font-mono text-sm">feat/new-docs</td>
+                      <td><span class="spinner spinner-sm"></span></td>
+                      <td>
+                        <button class="btn btn-ghost btn-sm">View</button>
+                        <button class="btn btn-ghost btn-sm">Cancel</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="font-medium">admin-panel</td>
+                      <td><span class="badge badge-destructive badge-dot">Failed</span></td>
+                      <td class="font-mono text-sm">fix/auth-bug</td>
+                      <td>45s</td>
+                      <td>
+                        <button class="btn btn-ghost btn-sm">View</button>
+                        <button class="btn btn-ghost btn-sm">Retry</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="font-medium">landing-page</td>
+                      <td><span class="badge badge-success badge-dot">Deployed</span></td>
+                      <td class="font-mono text-sm">main</td>
+                      <td>5s</td>
+                      <td>
+                        <button class="btn btn-ghost btn-sm">View</button>
+                        <button class="btn btn-ghost btn-sm">Redeploy</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="flex justify-between items-center mt-4">
+                <span class="text-sm text-muted">Showing 5 of 142 deployments</span>
+                <nav class="pagination">
+                  <a class="pagination-item" href="#">&laquo;</a>
+                  <a class="pagination-item active" aria-current="page" href="#">1</a>
+                  <a class="pagination-item" href="#">2</a>
+                  <a class="pagination-item" href="#">3</a>
+                  <span class="pagination-ellipsis">&hellip;</span>
+                  <a class="pagination-item" href="#">29</a>
+                  <a class="pagination-item" href="#">&raquo;</a>
+                </nav>
+              </div>
+            </div>
+            <div class="tab-panel" data-tab-panel="members">
+              <div class="space-y-2 mt-4">
+                <div class="flex items-center justify-between p-3 rounded border">
+                  <div class="flex items-center gap-3">
+                    <div class="avatar" style="background:var(--primary);color:white">JD</div>
+                    <div>
+                      <div class="text-sm font-medium">Jane Doe</div>
+                      <div class="text-xs text-muted">jane@example.com</div>
+                    </div>
+                  </div>
+                  <span class="badge">Owner</span>
+                </div>
+                <div class="flex items-center justify-between p-3 rounded border">
+                  <div class="flex items-center gap-3">
+                    <div class="avatar" style="background:var(--success);color:white">AJ</div>
+                    <div>
+                      <div class="text-sm font-medium">Alex Johnson</div>
+                      <div class="text-xs text-muted">alex@example.com</div>
+                    </div>
+                  </div>
+                  <span class="badge badge-secondary">Admin</span>
+                </div>
+                <div class="flex items-center justify-between p-3 rounded border">
+                  <div class="flex items-center gap-3">
+                    <div class="avatar" style="background:var(--warning);color:white">SM</div>
+                    <div>
+                      <div class="text-sm font-medium">Sam Miller</div>
+                      <div class="text-xs text-muted">sam@example.com</div>
+                    </div>
+                  </div>
+                  <span class="badge badge-outline">Member</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Deploy Detail Dialog -->
+  <div class="dialog-overlay" id="deploy-dialog" data-state="closed">
+    <div class="dialog" style="position:relative;max-width:560px">
+      <button class="dialog-close" data-dialog-close>&times;</button>
+      <div class="dialog-header">
+        <div class="dialog-title">Deploy Details</div>
+        <div class="dialog-description">frontend-app &mdash; Production</div>
+      </div>
+      <div class="dialog-body">
+        <div class="space-y-4">
+          <div class="flex justify-between text-sm">
+            <span class="text-muted">Status</span>
+            <span class="badge badge-success badge-dot">Deployed</span>
+          </div>
+          <div class="flex justify-between text-sm">
+            <span class="text-muted">Commit</span>
+            <code class="text-xs">a1b2c3d</code>
+          </div>
+          <div class="flex justify-between text-sm">
+            <span class="text-muted">Branch</span>
+            <span class="font-mono">main</span>
+          </div>
+          <div class="flex justify-between text-sm">
+            <span class="text-muted">Duration</span>
+            <span>8 seconds</span>
+          </div>
+          <div class="flex justify-between text-sm">
+            <span class="text-muted">Deployed at</span>
+            <span>Feb 19, 2026 4:32 PM</span>
+          </div>
+          <div class="separator"></div>
+          <div>
+            <div class="text-sm font-medium mb-2">Build Output</div>
+            <pre style="font-size:.75rem;max-height:120px"><code>$ npm run build
+&gt; frontend-app@2.1.0 build
+&gt; next build
+
+  Creating an optimized production build...
+  Compiled successfully.
+  Route (app)                Size    First Load JS
+  / (static)                 5.2 kB    87.3 kB
+  /dashboard                 12 kB     94.1 kB
+  ✓ Build completed in 6.2s</code></pre>
+          </div>
+        </div>
+      </div>
+      <div class="dialog-footer">
+        <button class="btn btn-outline btn-sm" data-dialog-close>Close</button>
+        <button class="btn btn-sm" onclick="Ranju.toast({title:'Redeploying...',position:'bottom-right'});Ranju.dialog.close('deploy-dialog')">Redeploy</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Command Palette -->
+  <div class="command-overlay" id="cmd-demo" data-state="closed">
+    <div class="command-dialog">
+      <div class="command-input-wrapper">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/></svg>
+        <input class="command-input" placeholder="Search projects, settings, actions...">
+      </div>
+      <div class="command-list">
+        <div>
+          <div class="command-group-label">Projects</div>
+          <div class="command-item">frontend-app <span class="command-shortcut">Production</span></div>
+          <div class="command-item">api-server <span class="command-shortcut">Production</span></div>
+          <div class="command-item">docs-site <span class="command-shortcut">Staging</span></div>
+        </div>
+        <div>
+          <div class="command-group-label">Actions</div>
+          <div class="command-item" onclick="Ranju.theme.toggle();updateIcon();Ranju.command.close('cmd-demo')">Toggle Theme <span class="command-shortcut">T T</span></div>
+          <div class="command-item" onclick="Ranju.command.close('cmd-demo')">Settings <span class="command-shortcut">G S</span></div>
+          <div class="command-item" onclick="Ranju.command.close('cmd-demo')">New Project <span class="command-shortcut">N P</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../ranju.js"></script>
+  <script>
+    function toggleSidebar() {
+      document.getElementById('app-sidebar').classList.toggle('open');
+      document.getElementById('mob-overlay').classList.toggle('open');
+    }
+    function closeSidebar() {
+      document.getElementById('app-sidebar').classList.remove('open');
+      document.getElementById('mob-overlay').classList.remove('open');
+    }
+    function updateIcon() {
+      document.getElementById('t-icon').textContent = Ranju.theme.current() === 'dark' ? '\u2600' : '\u263E';
+    }
+    updateIcon();
+  </script>
+</body>
+</html>
