@@ -131,6 +131,14 @@
       overflow: hidden;
       margin-bottom: 1.5rem;
     }
+    .docs-block-label {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      color: var(--muted-fg);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
     .code-block-header {
       display: flex;
       justify-content: space-between;
@@ -326,6 +334,7 @@ Ranju.theme.current();      // get 'light' or 'dark'</code></pre>
       <section class="docs-section" id="typography">
         <h2>Typography</h2>
         <p>Clean heading scale, text utilities, and semantic inline elements.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview">
           <h1>Heading 1</h1>
           <h2>Heading 2</h2>
@@ -336,12 +345,22 @@ Ranju.theme.current();      // get 'light' or 'dark'</code></pre>
           <blockquote>Blockquotes for pull quotes and citations.</blockquote>
           <pre><code>const hello = "preformatted code block";</code></pre>
         </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;h1&gt;Heading 1&lt;/h1&gt;
+&lt;p&gt;Text with &lt;strong&gt;bold&lt;/strong&gt;, &lt;code&gt;code&lt;/code&gt;, &lt;mark&gt;highlight&lt;/mark&gt;.&lt;/p&gt;
+&lt;p class="text-muted text-sm"&gt;Muted secondary text.&lt;/p&gt;
+&lt;blockquote&gt;Blockquote.&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;const x = "preformatted";&lt;/code&gt;&lt;/pre&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Grid -->
       <section class="docs-section" id="grid">
         <h2>Grid & Layout</h2>
         <p>Responsive CSS grid and flexbox utility classes.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview">
           <div class="grid grid-cols-3 gap-4">
             <div class="p-4 rounded border text-center text-sm">1</div>
@@ -349,6 +368,7 @@ Ranju.theme.current();      // get 'light' or 'dark'</code></pre>
             <div class="p-4 rounded border text-center text-sm">3</div>
           </div>
         </div>
+        <div class="docs-block-label">Code</div>
         <div class="code-block">
           <div class="code-block-header"><span>HTML</span></div>
           <pre><code>&lt;div class="grid grid-cols-3 gap-4"&gt;
@@ -363,11 +383,20 @@ Ranju.theme.current();      // get 'light' or 'dark'</code></pre>
       <section class="docs-section" id="utilities">
         <h2>Utilities</h2>
         <p>Common spacing, sizing, border-radius, shadow, and display helpers.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview flex flex-wrap gap-3">
           <div class="p-3 rounded shadow-sm border text-sm">shadow-sm</div>
           <div class="p-3 rounded shadow border text-sm">shadow</div>
           <div class="p-3 rounded shadow-md border text-sm">shadow-md</div>
           <div class="p-3 rounded shadow-lg border text-sm">shadow-lg</div>
+        </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;div class="p-3 rounded shadow border"&gt;shadow&lt;/div&gt;
+&lt;div class="p-3 rounded shadow-md border"&gt;shadow-md&lt;/div&gt;
+&lt;div class="p-3 rounded shadow-lg border"&gt;shadow-lg&lt;/div&gt;
+&lt;!-- gap-1 to gap-8, p-0 to p-8, flex, grid, etc. --&gt;</code></pre>
         </div>
       </section>
 
@@ -375,6 +404,7 @@ Ranju.theme.current();      // get 'light' or 'dark'</code></pre>
       <section class="docs-section" id="accordion">
         <h2>Accordion</h2>
         <p>Expandable content panels, single or multi-open.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview">
           <div class="accordion">
             <div class="accordion-item" data-state="open">
@@ -397,6 +427,7 @@ Ranju.theme.current();      // get 'light' or 'dark'</code></pre>
             </div>
           </div>
         </div>
+        <div class="docs-block-label">Code</div>
         <div class="code-block">
           <div class="code-block-header"><span>HTML</span></div>
           <pre><code>&lt;div class="accordion"&gt;
@@ -414,6 +445,7 @@ Ranju.theme.current();      // get 'light' or 'dark'</code></pre>
       <section class="docs-section" id="alert">
         <h2>Alert</h2>
         <p>Contextual feedback messages with optional dismiss.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview space-y-4">
           <div class="alert alert-info">
             <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
@@ -446,12 +478,25 @@ Ranju.theme.current();      // get 'light' or 'dark'</code></pre>
             </div>
           </div>
         </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;div class="alert alert-info"&gt;
+  &lt;div class="alert-content"&gt;
+    &lt;div class="alert-title"&gt;Info&lt;/div&gt;
+    &lt;div class="alert-description"&gt;Message text.&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;button class="alert-close"&gt;&amp;times;&lt;/button&gt;
+&lt;/div&gt;
+&lt;!-- alert-success, alert-warning, alert-destructive --&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Aspect Ratio -->
       <section class="docs-section" id="aspect-ratio">
         <h2>Aspect Ratio</h2>
         <p>Maintain consistent aspect ratios for media containers.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview">
           <div class="grid grid-cols-3 gap-4">
             <div>
@@ -465,12 +510,20 @@ Ranju.theme.current();      // get 'light' or 'dark'</code></pre>
             </div>
           </div>
         </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;div class="aspect-square"&gt;1:1&lt;/div&gt;
+&lt;div class="aspect-video"&gt;16:9&lt;/div&gt;
+&lt;div class="aspect-photo"&gt;4:3&lt;/div&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Avatar -->
       <section class="docs-section" id="avatar">
         <h2>Avatar</h2>
         <p>User profile images with fallback initials and group stacking.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview flex items-center gap-4">
           <div class="avatar avatar-sm">SM</div>
           <div class="avatar">AP</div>
@@ -484,12 +537,24 @@ Ranju.theme.current();      // get 'light' or 'dark'</code></pre>
             <div class="avatar" style="background:var(--destructive);color:white">+3</div>
           </div>
         </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;div class="avatar avatar-sm"&gt;SM&lt;/div&gt;
+&lt;div class="avatar"&gt;AP&lt;/div&gt;
+&lt;div class="avatar avatar-lg"&gt;LG&lt;/div&gt;
+&lt;div class="avatar-group"&gt;
+  &lt;div class="avatar"&gt;A&lt;/div&gt;
+  &lt;div class="avatar"&gt;B&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Badge -->
       <section class="docs-section" id="badge">
         <h2>Badge</h2>
         <p>Small status labels and tags.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview flex flex-wrap gap-2 items-center">
           <span class="badge">Primary</span>
           <span class="badge badge-secondary">Secondary</span>
@@ -501,12 +566,21 @@ Ranju.theme.current();      // get 'light' or 'dark'</code></pre>
           <span class="badge badge-success badge-dot">Online</span>
           <span class="badge badge-lg">Large</span>
         </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;span class="badge"&gt;Primary&lt;/span&gt;
+&lt;span class="badge badge-secondary"&gt;Secondary&lt;/span&gt;
+&lt;span class="badge badge-outline"&gt;Outline&lt;/span&gt;
+&lt;span class="badge badge-success badge-dot"&gt;Online&lt;/span&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Breadcrumb -->
       <section class="docs-section" id="breadcrumb">
         <h2>Breadcrumb</h2>
         <p>Navigation path indicator.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview">
           <ol class="breadcrumb">
             <li><a href="#">Home</a></li>
@@ -514,12 +588,22 @@ Ranju.theme.current();      // get 'light' or 'dark'</code></pre>
             <li><span aria-current="page">Breadcrumb</span></li>
           </ol>
         </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;ol class="breadcrumb"&gt;
+  &lt;li&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="#"&gt;Components&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;span aria-current="page"&gt;Breadcrumb&lt;/span&gt;&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Button -->
       <section class="docs-section" id="button">
         <h2>Button</h2>
         <p>Action triggers in multiple variants and sizes.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview space-y-4">
           <div class="flex flex-wrap gap-2">
             <button class="btn">Primary</button>
@@ -549,15 +633,29 @@ Ranju.theme.current();      // get 'light' or 'dark'</code></pre>
             </div>
           </div>
         </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;button class="btn"&gt;Primary&lt;/button&gt;
+&lt;button class="btn btn-outline"&gt;Outline&lt;/button&gt;
+&lt;button class="btn btn-sm"&gt;Small&lt;/button&gt;
+&lt;button class="btn btn-lg"&gt;Large&lt;/button&gt;
+&lt;div class="btn-group"&gt;
+  &lt;button class="btn btn-outline"&gt;Left&lt;/button&gt;
+  &lt;button class="btn btn-outline"&gt;Right&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Calendar -->
       <section class="docs-section" id="calendar">
         <h2>Calendar</h2>
         <p>Interactive date picker calendar. Auto-initializes or use <code>Ranju.calendar(el, options)</code>.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview">
           <div class="calendar"></div>
         </div>
+        <div class="docs-block-label">Code</div>
         <div class="code-block">
           <div class="code-block-header"><span>HTML</span></div>
           <pre><code>&lt;div class="calendar"&gt;&lt;/div&gt;
@@ -574,6 +672,7 @@ Ranju.calendar(el, {
       <section class="docs-section" id="card">
         <h2>Card</h2>
         <p>Flexible content container with header, body, and footer regions.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview">
           <div class="grid grid-cols-2 gap-4">
             <div class="card">
@@ -608,12 +707,27 @@ Ranju.calendar(el, {
             </div>
           </div>
         </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;div class="card"&gt;
+  &lt;div class="card-header"&gt;
+    &lt;div class="card-title"&gt;Title&lt;/div&gt;
+    &lt;div class="card-description"&gt;Description&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="card-content"&gt;Content here&lt;/div&gt;
+  &lt;div class="card-footer"&gt;
+    &lt;button class="btn btn-sm"&gt;Action&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Carousel -->
       <section class="docs-section" id="carousel">
         <h2>Carousel</h2>
         <p>Image or content slider with navigation controls and dots.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview">
           <div class="carousel" style="height:200px">
             <div class="carousel-track">
@@ -636,12 +750,31 @@ Ranju.calendar(el, {
             </div>
           </div>
         </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;div class="carousel" style="height:200px"&gt;
+  &lt;div class="carousel-track"&gt;
+    &lt;div class="carousel-slide"&gt;Slide 1&lt;/div&gt;
+    &lt;div class="carousel-slide"&gt;Slide 2&lt;/div&gt;
+    &lt;div class="carousel-slide"&gt;Slide 3&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;button class="carousel-btn carousel-prev"&gt;&amp;#8249;&lt;/button&gt;
+  &lt;button class="carousel-btn carousel-next"&gt;&amp;#8250;&lt;/button&gt;
+  &lt;div class="carousel-dots"&gt;
+    &lt;button class="carousel-dot"&gt;&lt;/button&gt;
+    &lt;button class="carousel-dot"&gt;&lt;/button&gt;
+    &lt;button class="carousel-dot"&gt;&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Checkbox & Radio -->
       <section class="docs-section" id="checkbox">
         <h2>Checkbox & Radio</h2>
         <p>Custom styled selection controls with native semantics.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview">
           <div class="flex gap-6">
             <div class="space-y-2">
@@ -657,12 +790,27 @@ Ranju.calendar(el, {
             </div>
           </div>
         </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;label class="checkbox"&gt;
+  &lt;input type="checkbox" checked&gt;
+  &lt;span class="checkbox-mark"&gt;&lt;/span&gt;
+  Option A
+&lt;/label&gt;
+&lt;label class="radio"&gt;
+  &lt;input type="radio" name="choice" checked&gt;
+  &lt;span class="radio-mark"&gt;&lt;/span&gt;
+  Choice 1
+&lt;/label&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Collapsible -->
       <section class="docs-section" id="collapsible">
         <h2>Collapsible</h2>
         <p>Simple show/hide toggle for any content block.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview">
           <div class="collapsible" data-state="closed">
             <button class="btn btn-outline btn-sm collapsible-trigger">Toggle Content</button>
@@ -673,12 +821,23 @@ Ranju.calendar(el, {
             </div>
           </div>
         </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;div class="collapsible" data-state="closed"&gt;
+  &lt;button class="btn btn-outline btn-sm collapsible-trigger"&gt;Toggle&lt;/button&gt;
+  &lt;div class="collapsible-content"&gt;
+    &lt;div class="mt-4 p-4 rounded border"&gt;Hidden content&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Combobox -->
       <section class="docs-section" id="combobox">
         <h2>Combobox</h2>
         <p>Searchable dropdown select with filtering.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview">
           <div class="combobox" data-state="closed" style="max-width:300px">
             <input class="combobox-input input" placeholder="Search frameworks...">
@@ -692,12 +851,24 @@ Ranju.calendar(el, {
             </ul>
           </div>
         </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;div class="combobox" data-state="closed" style="max-width:300px"&gt;
+  &lt;input class="combobox-input input" placeholder="Search..."&gt;
+  &lt;ul class="combobox-list"&gt;
+    &lt;li class="combobox-option"&gt;Option 1&lt;/li&gt;
+    &lt;li class="combobox-option"&gt;Option 2&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Command Palette -->
       <section class="docs-section" id="command">
         <h2>Command Palette</h2>
         <p>Keyboard-first command launcher. Press <kbd>Ctrl</kbd> + <kbd>K</kbd> or click the button below.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview">
           <button class="btn btn-outline" onclick="Ranju.command.open('cmd-demo')">
             Open Command Palette &nbsp;<kbd>Ctrl+K</kbd>
@@ -735,12 +906,30 @@ Ranju.calendar(el, {
             </div>
           </div>
         </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;button onclick="Ranju.command.open('cmd')"&gt;Open&lt;/button&gt;
+&lt;div class="command-overlay" id="cmd" data-state="closed"&gt;
+  &lt;div class="command-dialog"&gt;
+    &lt;div class="command-input-wrapper"&gt;
+      &lt;input class="command-input" placeholder="Type a command..."&gt;
+    &lt;/div&gt;
+    &lt;div class="command-list"&gt;
+      &lt;div class="command-group-label"&gt;Actions&lt;/div&gt;
+      &lt;div class="command-item"&gt;Toggle Theme&lt;span class="command-shortcut"&gt;T T&lt;/span&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;!-- Ctrl+K opens automatically --&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Context Menu -->
       <section class="docs-section" id="context-menu">
         <h2>Context Menu</h2>
         <p>Right-click menu overlay.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview">
           <div class="p-8 rounded border text-center text-sm text-muted" data-context-menu="ctx-demo" style="background: var(--muted)">
             Right-click this area
@@ -755,12 +944,24 @@ Ranju.calendar(el, {
           <li class="context-menu-separator"></li>
           <li class="context-menu-item" data-disabled>Delete</li>
         </ul>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;div data-context-menu="ctx" class="p-8 border rounded"&gt;Right-click here&lt;/div&gt;
+&lt;ul class="context-menu" id="ctx"&gt;
+  &lt;li class="context-menu-item"&gt;Cut &lt;span class="shortcut"&gt;Ctrl+X&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="context-menu-item"&gt;Copy &lt;span class="shortcut"&gt;Ctrl+C&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="context-menu-separator"&gt;&lt;/li&gt;
+  &lt;li class="context-menu-item" data-disabled&gt;Delete&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Data Table -->
       <section class="docs-section" id="data-table">
         <h2>Data Table</h2>
         <p>Sortable data tables with hover and stripe options. Click headers to sort.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview">
           <div class="table-wrapper">
             <table class="table-hover">
@@ -787,6 +988,7 @@ Ranju.calendar(el, {
       <section class="docs-section" id="dialog">
         <h2>Dialog</h2>
         <p>Modal dialog with overlay, close on backdrop click, and escape key support.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview flex gap-2">
           <button class="btn" data-dialog-open="dialog-demo">Open Dialog</button>
           <button class="btn btn-outline" data-dialog-open="alert-dialog-demo">Alert Dialog</button>
@@ -828,12 +1030,30 @@ Ranju.calendar(el, {
             </div>
           </div>
         </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;button data-dialog-open="my-dialog"&gt;Open&lt;/button&gt;
+&lt;div class="dialog-overlay" id="my-dialog" data-state="closed"&gt;
+  &lt;div class="dialog" style="position:relative"&gt;
+    &lt;button class="dialog-close" data-dialog-close&gt;&amp;times;&lt;/button&gt;
+    &lt;div class="dialog-header"&gt;
+      &lt;div class="dialog-title"&gt;Title&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="dialog-body"&gt;Content&lt;/div&gt;
+    &lt;div class="dialog-footer"&gt;
+      &lt;button data-dialog-close&gt;Close&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Drawer -->
       <section class="docs-section" id="drawer">
         <h2>Drawer & Sheet</h2>
         <p>Bottom drawer and side sheet panels. Use the standard dialog system with overlay.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview flex gap-2">
           <button class="btn btn-outline" data-dialog-open="drawer-overlay-demo">Open Drawer</button>
           <button class="btn btn-outline" data-dialog-open="sheet-overlay-demo">Open Sheet (Right)</button>
@@ -864,12 +1084,23 @@ Ranju.calendar(el, {
             </div>
           </div>
         </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;button data-dialog-open="drawer-id"&gt;Open Drawer&lt;/button&gt;
+&lt;div class="dialog-overlay" id="drawer-id" data-state="closed"&gt;&lt;/div&gt;
+&lt;div class="drawer" data-state="closed"&gt;
+  &lt;div class="drawer-handle"&gt;&lt;/div&gt;
+  &lt;div class="p-6"&gt;Content. Use Ranju.dialog.close('drawer-id') to close.&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Dropdown -->
       <section class="docs-section" id="dropdown">
         <h2>Dropdown</h2>
         <p>Click-triggered menu overlays.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview flex gap-2">
           <div class="dropdown" data-state="closed">
             <button class="btn btn-outline" data-dropdown-trigger>Options &#9662;</button>
@@ -883,12 +1114,27 @@ Ranju.calendar(el, {
             </ul>
           </div>
         </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;div class="dropdown" data-state="closed"&gt;
+  &lt;button class="btn btn-outline" data-dropdown-trigger&gt;Options &amp;#9662;&lt;/button&gt;
+  &lt;ul class="dropdown-menu"&gt;
+    &lt;li class="dropdown-label"&gt;Section&lt;/li&gt;
+    &lt;li class="dropdown-item"&gt;Profile&lt;/li&gt;
+    &lt;li class="dropdown-item"&gt;Settings&lt;/li&gt;
+    &lt;li class="dropdown-separator"&gt;&lt;/li&gt;
+    &lt;li class="dropdown-item" style="color:var(--destructive)"&gt;Log Out&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Empty State -->
       <section class="docs-section" id="empty-state">
         <h2>Empty State</h2>
         <p>Placeholder content for empty lists or search results.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview">
           <div class="empty-state">
             <svg class="empty-state-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/></svg>
@@ -897,12 +1143,22 @@ Ranju.calendar(el, {
             <button class="btn btn-sm">Clear Filters</button>
           </div>
         </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;div class="empty-state"&gt;
+  &lt;div class="empty-state-title"&gt;No results found&lt;/div&gt;
+  &lt;div class="empty-state-description"&gt;Try adjusting your search.&lt;/div&gt;
+  &lt;button class="btn btn-sm"&gt;Clear Filters&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Input & Textarea -->
       <section class="docs-section" id="input">
         <h2>Input & Textarea</h2>
         <p>Form controls with validation states, groups, and field layouts.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview" style="max-width:420px">
           <div class="field">
             <label class="label">Username</label>
@@ -930,12 +1186,31 @@ Ranju.calendar(el, {
             <textarea placeholder="Type your message..."></textarea>
           </div>
         </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;div class="field"&gt;
+  &lt;label class="label"&gt;Username&lt;/label&gt;
+  &lt;input type="text" class="input" placeholder="Enter username"&gt;
+  &lt;div class="field-hint"&gt;Must be 3+ chars.&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="field"&gt;
+  &lt;label class="label label-required"&gt;Email&lt;/label&gt;
+  &lt;input type="email" class="input" placeholder="name@example.com"&gt;
+&lt;/div&gt;
+&lt;div class="input-group"&gt;
+  &lt;span class="input-group-text"&gt;https://&lt;/span&gt;
+  &lt;input type="text" class="input" placeholder="example.com"&gt;
+&lt;/div&gt;
+&lt;textarea placeholder="Message..."&gt;&lt;/textarea&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Hover Card -->
       <section class="docs-section" id="hover-card">
         <h2>Hover Card</h2>
         <p>Rich content preview on hover.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview">
           <div class="hover-card">
             <a href="#" class="font-semibold">@ranju</a>
@@ -951,12 +1226,27 @@ Ranju.calendar(el, {
             </div>
           </div>
         </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;div class="hover-card"&gt;
+  &lt;a href="#"&gt;@username&lt;/a&gt;
+  &lt;div class="hover-card-content"&gt;
+    &lt;div class="flex items-center gap-3"&gt;
+      &lt;div class="avatar"&gt;U&lt;/div&gt;
+      &lt;div&gt;&lt;div class="font-semibold"&gt;Name&lt;/div&gt;&lt;div class="text-xs text-muted"&gt;@user&lt;/div&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;p class="text-sm text-muted"&gt;Description.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Kbd -->
       <section class="docs-section" id="kbd">
         <h2>Kbd</h2>
         <p>Keyboard shortcut hints.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview flex flex-wrap items-center gap-2">
           <kbd>Ctrl</kbd> + <kbd>C</kbd>
           &nbsp;&nbsp;
@@ -966,15 +1256,28 @@ Ranju.calendar(el, {
           &nbsp;&nbsp;
           <kbd>&#8984;</kbd> + <kbd>K</kbd>
         </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;C&lt;/kbd&gt;
+&lt;kbd&gt;Esc&lt;/kbd&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Label -->
       <section class="docs-section" id="label">
         <h2>Label</h2>
         <p>Form labels with required indicator support.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview">
           <label class="label">Regular Label</label>
           <label class="label label-required">Required Label</label>
+        </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;label class="label"&gt;Field name&lt;/label&gt;
+&lt;label class="label label-required"&gt;Required&lt;/label&gt;</code></pre>
         </div>
       </section>
 
@@ -982,6 +1285,7 @@ Ranju.calendar(el, {
       <section class="docs-section" id="menubar">
         <h2>Menubar & Navigation</h2>
         <p>App menubar and responsive navigation bar.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview space-y-4">
           <div class="menubar">
             <div class="menubar-item">File</div>
@@ -999,12 +1303,24 @@ Ranju.calendar(el, {
             </ul>
           </nav>
         </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;nav class="navbar"&gt;
+  &lt;a href="#" class="navbar-brand"&gt;Logo&lt;/a&gt;
+  &lt;ul class="navbar-nav"&gt;
+    &lt;li&gt;&lt;a href="#" class="navbar-link"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#" class="navbar-link"&gt;Docs&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Meter -->
       <section class="docs-section" id="meter">
         <h2>Meter</h2>
         <p>Value gauge indicator with semantic colors.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview space-y-4" style="max-width:400px">
           <div>
             <div class="flex justify-between text-sm mb-1"><span>Storage</span><span class="text-muted">45%</span></div>
@@ -1019,12 +1335,20 @@ Ranju.calendar(el, {
             <div class="meter meter-destructive"><div class="meter-fill" style="width:92%"></div></div>
           </div>
         </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;div class="meter"&gt;&lt;div class="meter-fill" style="width:65%"&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class="meter meter-warning"&gt;&lt;div class="meter-fill" style="width:80%"&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class="meter meter-destructive"&gt;&lt;div class="meter-fill" style="width:95%"&gt;&lt;/div&gt;&lt;/div&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Pagination -->
       <section class="docs-section" id="pagination">
         <h2>Pagination</h2>
         <p>Page navigation controls.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview">
           <nav class="pagination">
             <a class="pagination-item" href="#">&laquo;</a>
@@ -1036,12 +1360,23 @@ Ranju.calendar(el, {
             <a class="pagination-item" href="#">&raquo;</a>
           </nav>
         </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;nav class="pagination"&gt;
+  &lt;a class="pagination-item" href="#"&gt;&amp;laquo;&lt;/a&gt;
+  &lt;a class="pagination-item" href="#"&gt;1&lt;/a&gt;
+  &lt;a class="pagination-item active" aria-current="page" href="#"&gt;2&lt;/a&gt;
+  &lt;a class="pagination-item" href="#"&gt;&amp;raquo;&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Popover -->
       <section class="docs-section" id="popover">
         <h2>Popover</h2>
         <p>Click-triggered floating content panel.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview">
           <div class="popover" data-state="closed">
             <button class="btn btn-outline" data-popover-trigger>Open Popover</button>
@@ -1056,17 +1391,36 @@ Ranju.calendar(el, {
             </div>
           </div>
         </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;div class="popover" data-state="closed"&gt;
+  &lt;button class="btn btn-outline" data-popover-trigger&gt;Open&lt;/button&gt;
+  &lt;div class="popover-content"&gt;
+    &lt;h4&gt;Content&lt;/h4&gt;
+    &lt;input type="text" class="input"&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Progress -->
       <section class="docs-section" id="progress">
         <h2>Progress</h2>
         <p>Determinate and indeterminate loading bars.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview space-y-4" style="max-width:400px">
           <div class="progress"><div class="progress-fill" style="width:65%"></div></div>
           <div class="progress progress-sm"><div class="progress-fill" style="width:40%"></div></div>
           <div class="progress progress-lg"><div class="progress-fill" style="width:85%"></div></div>
           <div class="progress progress-indeterminate"><div class="progress-fill"></div></div>
+        </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;div class="progress"&gt;&lt;div class="progress-fill" style="width:65%"&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class="progress progress-sm"&gt;&lt;div class="progress-fill" style="width:40%"&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class="progress progress-indeterminate"&gt;&lt;div class="progress-fill"&gt;&lt;/div&gt;&lt;/div&gt;</code></pre>
         </div>
       </section>
 
@@ -1074,6 +1428,7 @@ Ranju.calendar(el, {
       <section class="docs-section" id="resizable">
         <h2>Resizable</h2>
         <p>Draggable resize handles between panels.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview">
           <div class="resizable border rounded" style="height:150px">
             <div class="resizable-panel p-4 text-sm text-muted">Left Panel</div>
@@ -1081,12 +1436,22 @@ Ranju.calendar(el, {
             <div class="resizable-panel p-4 text-sm text-muted">Right Panel</div>
           </div>
         </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;div class="resizable border rounded" style="height:150px"&gt;
+  &lt;div class="resizable-panel p-4"&gt;Left&lt;/div&gt;
+  &lt;div class="resizable-handle"&gt;&lt;/div&gt;
+  &lt;div class="resizable-panel p-4"&gt;Right&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Scroll Area -->
       <section class="docs-section" id="scroll-area">
         <h2>Scroll Area</h2>
         <p>Custom styled scrollbar container.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview">
           <div class="scroll-area border rounded p-4" style="height:150px">
             <p>Scrollable content area with custom thin scrollbars.</p>
@@ -1097,12 +1462,20 @@ Ranju.calendar(el, {
             <p>Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra.</p>
           </div>
         </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;div class="scroll-area" style="height:200px"&gt;
+  &lt;p&gt;Long scrollable content...&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Separator -->
       <section class="docs-section" id="separator">
         <h2>Separator</h2>
         <p>Horizontal and vertical content dividers.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview">
           <p class="text-sm">Content above</p>
           <hr class="separator">
@@ -1114,12 +1487,24 @@ Ranju.calendar(el, {
             <span class="text-sm">Right</span>
           </div>
         </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;hr class="separator"&gt;
+&lt;div class="separator-label"&gt;or continue with&lt;/div&gt;
+&lt;div class="flex items-center gap-4"&gt;
+  &lt;span&gt;Left&lt;/span&gt;
+  &lt;div class="separator-vertical" style="height:1.5rem"&gt;&lt;/div&gt;
+  &lt;span&gt;Right&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Sidebar (component) -->
       <section class="docs-section" id="sidebar-component">
         <h2>Sidebar</h2>
         <p>App sidebar navigation with sections, labels, and collapsible support.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview">
           <div class="sidebar border rounded" id="demo-sidebar" style="position:relative;height:300px;width:240px">
             <div class="sidebar-header">
@@ -1154,12 +1539,28 @@ Ranju.calendar(el, {
             </div>
           </div>
         </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;div class="sidebar" style="height:300px;width:240px"&gt;
+  &lt;div class="sidebar-header"&gt;&lt;div class="font-semibold"&gt;Workspace&lt;/div&gt;&lt;/div&gt;
+  &lt;div class="sidebar-content"&gt;
+    &lt;div class="sidebar-label"&gt;Main&lt;/div&gt;
+    &lt;a class="sidebar-item active" href="#"&gt;Dashboard&lt;/a&gt;
+    &lt;a class="sidebar-item" href="#"&gt;Settings&lt;/a&gt;
+  &lt;/div&gt;
+  &lt;div class="sidebar-footer"&gt;
+    &lt;button class="btn btn-ghost btn-sm" data-sidebar-toggle="sidebar-id"&gt;Toggle&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Skeleton -->
       <section class="docs-section" id="skeleton">
         <h2>Skeleton</h2>
         <p>Loading placeholder shimmer animations.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview">
           <div class="flex gap-4">
             <div class="skeleton skeleton-avatar"></div>
@@ -1177,12 +1578,22 @@ Ranju.calendar(el, {
             <div class="skeleton skeleton-btn"></div>
           </div>
         </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;div class="skeleton skeleton-avatar"&gt;&lt;/div&gt;
+&lt;div class="skeleton skeleton-heading"&gt;&lt;/div&gt;
+&lt;div class="skeleton skeleton-text"&gt;&lt;/div&gt;
+&lt;div class="skeleton skeleton-image"&gt;&lt;/div&gt;
+&lt;div class="skeleton skeleton-btn"&gt;&lt;/div&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Slider -->
       <section class="docs-section" id="slider">
         <h2>Slider</h2>
         <p>Range input with custom styling.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview" style="max-width:400px">
           <div class="field">
             <label class="label">Volume — <span id="slider-val">50</span>%</label>
@@ -1191,12 +1602,24 @@ Ranju.calendar(el, {
             </div>
           </div>
         </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;div class="field"&gt;
+  &lt;label class="label"&gt;Volume &lt;span id="vol"&gt;50&lt;/span&gt;%&lt;/label&gt;
+  &lt;div class="slider"&gt;
+    &lt;input type="range" min="0" max="100" value="50"
+           oninput="document.getElementById('vol').textContent=this.value"&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Spinner -->
       <section class="docs-section" id="spinner">
         <h2>Spinner</h2>
         <p>Loading indicator variants.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview flex items-center gap-6">
           <div>
             <div class="text-xs text-muted mb-2">Default</div>
@@ -1218,12 +1641,22 @@ Ranju.calendar(el, {
             <div class="spinner-bar"><span></span><span></span><span></span><span></span></div>
           </div>
         </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;div class="spinner spinner-sm"&gt;&lt;/div&gt;
+&lt;div class="spinner"&gt;&lt;/div&gt;
+&lt;div class="spinner spinner-lg"&gt;&lt;/div&gt;
+&lt;div class="spinner-dots"&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;div class="spinner-bar"&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Switch & Toggle -->
       <section class="docs-section" id="switch">
         <h2>Switch & Toggle</h2>
         <p>On/off switches and pressable toggle buttons.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview space-y-4">
           <div class="flex gap-6">
             <label class="switch">
@@ -1248,12 +1681,28 @@ Ranju.calendar(el, {
             <button class="toggle" aria-pressed="false">Right</button>
           </div>
         </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;label class="switch"&gt;
+  &lt;input type="checkbox" checked&gt;
+  &lt;span class="switch-track"&gt;&lt;span class="switch-thumb"&gt;&lt;/span&gt;&lt;/span&gt;
+  Label
+&lt;/label&gt;
+&lt;button class="toggle active" aria-pressed="true"&gt;Bold&lt;/button&gt;
+&lt;div class="toggle-group"&gt;
+  &lt;button class="toggle active"&gt;Left&lt;/button&gt;
+  &lt;button class="toggle"&gt;Center&lt;/button&gt;
+  &lt;button class="toggle"&gt;Right&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Tabs -->
       <section class="docs-section" id="tabs">
         <h2>Tabs</h2>
         <p>Tabbed content panels with underline and pill variants.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview">
           <div class="tabs">
             <div class="tabs-list">
@@ -1281,18 +1730,32 @@ Ranju.calendar(el, {
             </div>
           </div>
         </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;div class="tabs"&gt;
+  &lt;div class="tabs-list"&gt;
+    &lt;button class="tabs-trigger active" data-tab="one"&gt;Tab 1&lt;/button&gt;
+    &lt;button class="tabs-trigger" data-tab="two"&gt;Tab 2&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="tab-panel active" data-tab-panel="one"&gt;Content 1&lt;/div&gt;
+  &lt;div class="tab-panel" data-tab-panel="two"&gt;Content 2&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Toast -->
       <section class="docs-section" id="toast">
         <h2>Toast / Notification</h2>
         <p>Non-blocking notifications via JavaScript API.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview flex flex-wrap gap-2">
           <button class="btn btn-outline" onclick="Ranju.toast({title:'Event Created',description:'Your event has been saved.',position:'bottom-right'})">Default Toast</button>
           <button class="btn btn-outline" onclick="Ranju.toast({title:'Success!',description:'Changes have been saved.',variant:'success',position:'bottom-right'})">Success</button>
           <button class="btn btn-outline" onclick="Ranju.toast({title:'Error',description:'Something went wrong.',variant:'destructive',position:'bottom-right'})">Error</button>
           <button class="btn btn-outline" onclick="Ranju.toast({title:'Warning',description:'Please check your input.',variant:'warning',position:'bottom-right'})">Warning</button>
         </div>
+        <div class="docs-block-label">Code</div>
         <div class="code-block">
           <div class="code-block-header"><span>JS</span></div>
           <pre><code>Ranju.toast({
@@ -1309,6 +1772,7 @@ Ranju.calendar(el, {
       <section class="docs-section" id="tooltip">
         <h2>Tooltip</h2>
         <p>Lightweight hover hints. CSS-only or use <code>data-tooltip</code> for JS-enhanced tooltips.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview flex gap-4">
           <div class="tooltip">
             <button class="btn btn-outline btn-sm">Hover me (CSS)</button>
@@ -1316,12 +1780,22 @@ Ranju.calendar(el, {
           </div>
           <button class="btn btn-outline btn-sm" data-tooltip="JS-enhanced tooltip">Hover me (JS)</button>
         </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;div class="tooltip"&gt;
+  &lt;button class="btn btn-sm"&gt;Hover me&lt;/button&gt;
+  &lt;div class="tooltip-content"&gt;Tooltip text&lt;/div&gt;
+&lt;/div&gt;
+&lt;button data-tooltip="JS tooltip"&gt;Hover me&lt;/button&gt;</code></pre>
+        </div>
       </section>
 
       <!-- Item Group -->
       <section class="docs-section" id="item-group">
         <h2>Item Group</h2>
         <p>Vertical or horizontal list layout for items with icons, text, and actions.</p>
+        <div class="docs-block-label">Preview</div>
         <div class="preview">
           <div class="item-group border rounded">
             <div class="item item-clickable">
@@ -1347,6 +1821,24 @@ Ranju.calendar(el, {
               </div>
             </div>
           </div>
+        </div>
+        <div class="docs-block-label">Code</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>HTML</span></div>
+          <pre><code>&lt;div class="item-group border rounded"&gt;
+  &lt;div class="item item-clickable"&gt;
+    &lt;div class="item-content"&gt;
+      &lt;div class="item-title"&gt;Dashboard&lt;/div&gt;
+      &lt;div class="item-description"&gt;Overview&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;span class="badge badge-ghost item-action"&gt;New&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="item item-clickable"&gt;
+    &lt;div class="item-content"&gt;
+      &lt;div class="item-title"&gt;Settings&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
         </div>
       </section>
 
