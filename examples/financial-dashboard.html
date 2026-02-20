@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finance — Financial Dashboard Example | RanjuUI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../ranju.css">
+  <style>
+    body { display: flex; min-height: 100vh; background: var(--muted); }
+    .app-sidebar {
+      width: 260px; position: fixed; top: 0; left: 0; bottom: 0;
+      background: var(--bg); border-right: 1px solid var(--border);
+      display: flex; flex-direction: column; z-index: 40;
+      transition: transform .3s ease;
+    }
+    .app-sidebar-header { padding: 1rem 1.25rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 0.5rem; }
+    .app-sidebar-content { flex: 1; overflow-y: auto; padding: 0.5rem; }
+    .app-sidebar-footer { padding: 0.75rem; border-top: 1px solid var(--border); }
+    .app-main { flex: 1; margin-left: 260px; min-width: 0; }
+    .app-topbar {
+      position: sticky; top: 0; z-index: 30;
+      background: color-mix(in srgb, var(--bg) 90%, transparent);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.75rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    }
+    .app-topbar-left, .app-topbar-right { display: flex; align-items: center; gap: 0.5rem; }
+    .app-content { padding: 1.5rem; }
+    .stat-card { display: flex; flex-direction: column; gap: 0.25rem; }
+    .stat-value { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.03em; }
+    .stat-label { font-size: 0.8125rem; color: var(--muted-fg); }
+    .stat-change { font-size: 0.75rem; font-weight: 500; }
+    .stat-up { color: var(--success); }
+    .stat-down { color: var(--destructive); }
+    .account-card { transition: box-shadow .15s; }
+    .account-card:hover { box-shadow: var(--shadow-md); }
+    .mobile-menu-btn { display: none; background: none; border: 1px solid var(--border); border-radius: var(--radius-sm); width: 2.25rem; height: 2.25rem; align-items: center; justify-content: center; cursor: pointer; color: var(--fg); }
+    .mobile-overlay { display: none; position: fixed; inset: 0; background: var(--overlay); z-index: 39; }
+    @media (max-width: 900px) {
+      .app-sidebar { transform: translateX(-100%); box-shadow: var(--shadow-xl); }
+      .app-sidebar.open { transform: translateX(0); }
+      .mobile-overlay.open { display: block; }
+      .mobile-menu-btn { display: flex; }
+      .app-main { margin-left: 0; }
+      .grid.grid-cols-4 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .grid.grid-cols-4 { grid-template-columns: 1fr; }
+      .app-content { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="mobile-overlay" id="mob-overlay" onclick="closeSidebar()"></div>
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="app-sidebar" id="app-sidebar">
+    <div class="app-sidebar-header">
+      <div class="avatar" style="width:1.75rem;height:1.75rem;font-size:.625rem;background:var(--success);color:white">$</div>
+      <span class="font-semibold text-sm">Finance</span>
+    </div>
+    <div class="app-sidebar-content">
+      <div class="sidebar-label">Overview</div>
+      <a class="sidebar-item active" href="#" onclick="closeSidebar()">
+        <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4z"/><path d="M3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/></svg>
+        <span class="sidebar-item-text">Dashboard</span>
+      </a>
+      <a class="sidebar-item" href="#" onclick="closeSidebar()">
+        <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M12 12a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4a2 2 0 012-2h4z" clip-rule="evenodd"/></svg>
+        <span class="sidebar-item-text">Accounts</span>
+      </a>
+      <a class="sidebar-item" href="#" onclick="closeSidebar()">
+        <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/></svg>
+        <span class="sidebar-item-text">Transactions</span>
+      </a>
+      <div class="sidebar-label">Planning</div>
+      <a class="sidebar-item" href="#" onclick="closeSidebar()">
+        <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/></svg>
+        <span class="sidebar-item-text">Budgets</span>
+      </a>
+      <a class="sidebar-item" href="#" onclick="closeSidebar()">
+        <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clip-rule="evenodd"/></svg>
+        <span class="sidebar-item-text">Reports</span>
+      </a>
+    </div>
+    <div class="app-sidebar-footer">
+      <div class="flex items-center gap-3 p-2">
+        <div class="avatar" style="width:2rem;height:2rem;font-size:.75rem;background:var(--primary);color:white">MK</div>
+        <div class="flex-1 min-w-0">
+          <div class="text-sm font-medium truncate">Mike Kim</div>
+          <div class="text-xs text-muted truncate">mike@example.com</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN ===== -->
+  <main class="app-main">
+    <header class="app-topbar">
+      <div class="app-topbar-left">
+        <button class="mobile-menu-btn" onclick="toggleSidebar()" aria-label="Menu">&#9776;</button>
+        <h1 class="text-lg font-semibold" style="margin:0">Financial Overview</h1>
+      </div>
+      <div class="app-topbar-right">
+        <button class="btn btn-outline btn-sm" onclick="Ranju.command.open('cmd-finance')">Search <kbd>Ctrl+K</kbd></button>
+        <button class="btn btn-ghost btn-sm btn-icon" onclick="Ranju.theme.toggle();updateIcon()" aria-label="Theme"><span id="t-icon">&#9790;</span></button>
+        <button class="btn btn-sm" onclick="Ranju.dialog.open('transfer-dialog')">Transfer</button>
+        <div class="dropdown" data-state="closed">
+          <div class="avatar" style="width:2rem;height:2rem;font-size:.75rem;background:var(--primary);color:white;cursor:pointer" data-dropdown-trigger>MK</div>
+          <ul class="dropdown-menu" style="right:0;left:auto">
+            <li class="dropdown-label">Account</li>
+            <li class="dropdown-item">Profile</li>
+            <li class="dropdown-item">Security</li>
+            <li class="dropdown-separator"></li>
+            <li class="dropdown-item" style="color:var(--destructive)">Log Out</li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <div class="app-content">
+
+      <!-- Net Worth & Quick Stats -->
+      <div class="grid grid-cols-4 gap-4 mb-6">
+        <div class="card">
+          <div class="card-content stat-card">
+            <div class="stat-label">Net Worth</div>
+            <div class="stat-value">$124,580</div>
+            <div class="stat-change stat-up">&#9650; 4.2% this month</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-content stat-card">
+            <div class="stat-label">Cash Balance</div>
+            <div class="stat-value">$18,420</div>
+            <div class="stat-change">Across 3 accounts</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-content stat-card">
+            <div class="stat-label">Investments</div>
+            <div class="stat-value">$89,200</div>
+            <div class="stat-change stat-up">&#9650; 6.1% YTD</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-content stat-card">
+            <div class="stat-label">Monthly Spending</div>
+            <div class="stat-value">$3,240</div>
+            <div class="stat-change stat-down">&#9660; 8% vs last month</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alerts -->
+      <div class="mb-6">
+        <div class="alert alert-warning">
+          <div class="alert-content">
+            <div class="alert-title">Upcoming Payment</div>
+            <div class="alert-description">Rent due in 5 days — $1,850</div>
+          </div>
+          <button class="btn btn-sm" onclick="Ranju.toast({title:'Payment scheduled',position:'bottom-right'})">Pay Now</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-6 mb-6">
+        <!-- Accounts -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">My Accounts</div>
+            <button class="btn btn-ghost btn-sm" onclick="Ranju.toast({title:'Add account',position:'bottom-right'})">+ Add</button>
+          </div>
+          <div class="card-content p-0">
+            <div class="item-group" style="border:none">
+              <div class="item item-clickable account-card p-4 rounded m-2" style="border:1px solid var(--border)">
+                <div class="flex items-center gap-3">
+                  <div class="avatar" style="background:var(--primary);color:white">C</div>
+                  <div>
+                    <div class="item-title">Checking</div>
+                    <div class="item-description text-xs">****4521</div>
+                  </div>
+                </div>
+                <div class="font-semibold text-right">$12,450</div>
+              </div>
+              <div class="item item-clickable account-card p-4 rounded m-2" style="border:1px solid var(--border)">
+                <div class="flex items-center gap-3">
+                  <div class="avatar" style="background:var(--success);color:white">S</div>
+                  <div>
+                    <div class="item-title">Savings</div>
+                    <div class="item-description text-xs">****7832</div>
+                  </div>
+                </div>
+                <div class="font-semibold text-right">$5,970</div>
+              </div>
+              <div class="item item-clickable account-card p-4 rounded m-2" style="border:1px solid var(--border)">
+                <div class="flex items-center gap-3">
+                  <div class="avatar" style="background:var(--info);color:white">I</div>
+                  <div>
+                    <div class="item-title">Brokerage</div>
+                    <div class="item-description text-xs">****2201</div>
+                  </div>
+                </div>
+                <div class="font-semibold text-right">$89,200</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Budget Progress -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Budget Overview</div>
+            <span class="badge badge-success badge-dot">On Track</span>
+          </div>
+          <div class="card-content space-y-4">
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span>Food & Dining</span>
+                <span class="text-muted">$420 / $600</span>
+              </div>
+              <div class="meter"><div class="meter-fill" style="width:70%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span>Shopping</span>
+                <span class="text-muted">$280 / $400</span>
+              </div>
+              <div class="meter meter-warning"><div class="meter-fill" style="width:70%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span>Transport</span>
+                <span class="text-muted">$180 / $250</span>
+              </div>
+              <div class="meter"><div class="meter-fill" style="width:72%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span>Entertainment</span>
+                <span class="text-muted">$95 / $150</span>
+              </div>
+              <div class="progress progress-sm"><div class="progress-fill" style="width:63%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Transactions -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Recent Transactions</div>
+          <a href="#" class="btn btn-ghost btn-sm">View All</a>
+        </div>
+        <div class="card-content p-0">
+          <div class="table-wrapper">
+            <table class="table-hover">
+              <thead>
+                <tr>
+                  <th>Description</th>
+                  <th>Category</th>
+                  <th>Date</th>
+                  <th class="text-right">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="font-medium">Whole Foods Market</td>
+                  <td><span class="badge badge-ghost">Food</span></td>
+                  <td class="text-muted text-sm">Feb 18, 2026</td>
+                  <td class="text-right font-mono" style="color:var(--destructive)">-$84.32</td>
+                </tr>
+                <tr>
+                  <td class="font-medium">Direct Deposit • Acme Corp</td>
+                  <td><span class="badge badge-ghost">Income</span></td>
+                  <td class="text-muted text-sm">Feb 16, 2026</td>
+                  <td class="text-right font-mono" style="color:var(--success)">+$4,200</td>
+                </tr>
+                <tr>
+                  <td class="font-medium">Shell Gas Station</td>
+                  <td><span class="badge badge-ghost">Transport</span></td>
+                  <td class="text-muted text-sm">Feb 15, 2026</td>
+                  <td class="text-right font-mono" style="color:var(--destructive)">-$52.00</td>
+                </tr>
+                <tr>
+                  <td class="font-medium">Netflix</td>
+                  <td><span class="badge badge-ghost">Subscriptions</span></td>
+                  <td class="text-muted text-sm">Feb 14, 2026</td>
+                  <td class="text-right font-mono" style="color:var(--destructive)">-$15.99</td>
+                </tr>
+                <tr>
+                  <td class="font-medium">Stripe Purchase</td>
+                  <td><span class="badge badge-ghost">Shopping</span></td>
+                  <td class="text-muted text-sm">Feb 13, 2026</td>
+                  <td class="text-right font-mono" style="color:var(--destructive)">-$129.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="flex justify-between items-center p-4 border-t">
+            <span class="text-sm text-muted">Last 5 transactions</span>
+            <nav class="pagination">
+              <a class="pagination-item" href="#">&laquo;</a>
+              <a class="pagination-item active" aria-current="page" href="#">1</a>
+              <a class="pagination-item" href="#">2</a>
+              <a class="pagination-item" href="#">&raquo;</a>
+            </nav>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Transfer Dialog -->
+  <div class="dialog-overlay" id="transfer-dialog" data-state="closed">
+    <div class="dialog" style="position:relative;max-width:420px">
+      <button class="dialog-close" data-dialog-close>&times;</button>
+      <div class="dialog-header">
+        <div class="dialog-title">Transfer Funds</div>
+        <div class="dialog-description">Move money between your accounts</div>
+      </div>
+      <div class="dialog-body">
+        <div class="field">
+          <label class="label">From</label>
+          <select class="input">
+            <option>Checking ****4521</option>
+            <option>Savings ****7832</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="label">To</label>
+          <select class="input">
+            <option>Savings ****7832</option>
+            <option>Checking ****4521</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="label">Amount</label>
+          <input type="text" class="input" placeholder="$0.00">
+        </div>
+      </div>
+      <div class="dialog-footer">
+        <button class="btn btn-outline" data-dialog-close>Cancel</button>
+        <button class="btn" onclick="Ranju.toast({title:'Transfer initiated',description:'$500 to Savings',variant:'success',position:'bottom-right'});Ranju.dialog.close('transfer-dialog')">Transfer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Command Palette -->
+  <div class="command-overlay" id="cmd-finance" data-state="closed">
+    <div class="command-dialog">
+      <div class="command-input-wrapper">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/></svg>
+        <input class="command-input" placeholder="Search transactions, accounts...">
+      </div>
+      <div class="command-list">
+        <div>
+          <div class="command-group-label">Accounts</div>
+          <div class="command-item">Checking</div>
+          <div class="command-item">Savings</div>
+          <div class="command-item">Brokerage</div>
+        </div>
+        <div>
+          <div class="command-group-label">Actions</div>
+          <div class="command-item" onclick="Ranju.dialog.open('transfer-dialog');Ranju.command.close('cmd-finance')">Transfer Funds</div>
+          <div class="command-item" onclick="Ranju.theme.toggle();updateIcon();Ranju.command.close('cmd-finance')">Toggle Theme</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../ranju.js"></script>
+  <script>
+    function toggleSidebar() {
+      document.getElementById('app-sidebar').classList.toggle('open');
+      document.getElementById('mob-overlay').classList.toggle('open');
+    }
+    function closeSidebar() {
+      document.getElementById('app-sidebar').classList.remove('open');
+      document.getElementById('mob-overlay').classList.remove('open');
+    }
+    function updateIcon() {
+      document.getElementById('t-icon').textContent = Ranju.theme.current() === 'dark' ? '\u2600' : '\u263E';
+    }
+    updateIcon();
+  </script>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tasks — Kanban Board Example | RanjuUI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../ranju.css">
+  <style>
+    body { min-height: 100vh; background: var(--muted); }
+    .board-header {
+      padding: 1rem 1.5rem; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      position: sticky; top: 0; z-index: 20;
+      background: color-mix(in srgb, var(--bg) 90%, transparent);
+      backdrop-filter: blur(12px);
+    }
+    .board-content { padding: 1.5rem; overflow-x: auto; min-height: calc(100vh - 70px); }
+    .board-columns { display: flex; gap: 1.5rem; min-width: max-content; }
+    .board-column {
+      flex: 0 0 320px; display: flex; flex-direction: column;
+      background: var(--bg); border-radius: var(--radius-lg);
+      border: 1px solid var(--border); max-height: calc(100vh - 120px);
+    }
+    .board-column-header {
+      padding: 1rem 1.25rem; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .board-column-title { font-weight: 600; font-size: 0.9375rem; }
+    .board-column-count { font-size: 0.75rem; color: var(--muted-fg); background: var(--muted); padding: 0.15rem 0.5rem; border-radius: var(--radius-sm); }
+    .board-column-cards {
+      flex: 1; overflow-y: auto; padding: 0.75rem;
+      display: flex; flex-direction: column; gap: 0.75rem;
+    }
+    .task-card {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1rem;
+      cursor: pointer; transition: box-shadow .15s;
+    }
+    .task-card:hover { box-shadow: var(--shadow-md); }
+    .task-card-title { font-weight: 500; font-size: 0.9375rem; margin-bottom: 0.5rem; }
+    .task-card-meta { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; font-size: 0.75rem; color: var(--muted-fg); }
+    .add-task-btn {
+      display: flex; align-items: center; gap: 0.5rem;
+      width: 100%; padding: 0.75rem; margin-top: 0.25rem;
+      background: none; border: 1px dashed var(--border);
+      border-radius: var(--radius); color: var(--muted-fg);
+      font-size: 0.875rem; cursor: pointer; transition: all .15s;
+    }
+    .add-task-btn:hover { background: var(--muted); color: var(--fg); border-color: var(--primary); }
+    @media (max-width: 768px) {
+      .board-columns { flex-direction: column; }
+      .board-column { flex: 1 1 auto; max-height: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="board-header">
+    <div class="flex items-center gap-3">
+      <a href="index.html" style="text-decoration:none;color:var(--fg)" class="flex items-center gap-2">
+        <span style="color:var(--primary);font-size:1.25rem">&#9650;</span>
+        <span class="font-bold">RanjuUI</span>
+      </a>
+      <span class="text-muted">/</span>
+      <h1 class="font-semibold" style="margin:0;font-size:1.125rem">Sprint Board</h1>
+    </div>
+    <div class="flex items-center gap-2">
+      <div class="dropdown" data-state="closed">
+        <button class="btn btn-outline btn-sm" data-dropdown-trigger>Filter</button>
+        <ul class="dropdown-menu" style="right:0;left:auto">
+          <li class="dropdown-label">Priority</li>
+          <li class="dropdown-item">High</li>
+          <li class="dropdown-item">Medium</li>
+          <li class="dropdown-item">Low</li>
+          <li class="dropdown-separator"></li>
+          <li class="dropdown-label">Assignee</li>
+          <li class="dropdown-item">Unassigned</li>
+        </ul>
+      </div>
+      <button class="btn btn-ghost btn-sm btn-icon" onclick="Ranju.theme.toggle();updateIcon()" aria-label="Theme"><span id="t-icon">&#9790;</span></button>
+      <button class="btn btn-sm" onclick="Ranju.dialog.open('new-task-dialog')">+ New Task</button>
+    </div>
+  </header>
+
+  <!-- ===== BOARD ===== -->
+  <div class="board-content">
+    <div class="board-columns">
+
+      <!-- To Do -->
+      <div class="board-column">
+        <div class="board-column-header">
+          <span class="board-column-title">To Do</span>
+          <span class="board-column-count">3</span>
+        </div>
+        <div class="board-column-cards">
+          <div class="task-card" onclick="Ranju.dialog.open('task-detail-1')">
+            <div class="task-card-title">Implement dark mode toggle</div>
+            <div class="task-card-meta">
+              <span class="badge badge-destructive badge-dot">High</span>
+              <span class="badge badge-ghost text-xs">Frontend</span>
+              <span>Sarah K.</span>
+            </div>
+          </div>
+          <div class="task-card" onclick="Ranju.dialog.open('task-detail-2')">
+            <div class="task-card-title">Write API documentation</div>
+            <div class="task-card-meta">
+              <span class="badge badge-warning badge-dot">Medium</span>
+              <span class="badge badge-ghost text-xs">Docs</span>
+              <span>Unassigned</span>
+            </div>
+          </div>
+          <div class="task-card" onclick="Ranju.dialog.open('task-detail-2')">
+            <div class="task-card-title">Setup CI/CD pipeline</div>
+            <div class="task-card-meta">
+              <span class="badge badge-warning badge-dot">Medium</span>
+              <span class="badge badge-ghost text-xs">DevOps</span>
+              <span>Alex</span>
+            </div>
+          </div>
+          <button class="add-task-btn" onclick="Ranju.dialog.open('new-task-dialog')">+ Add task</button>
+        </div>
+      </div>
+
+      <!-- In Progress -->
+      <div class="board-column">
+        <div class="board-column-header">
+          <span class="board-column-title">In Progress</span>
+          <span class="board-column-count">2</span>
+        </div>
+        <div class="board-column-cards">
+          <div class="task-card" onclick="Ranju.dialog.open('task-detail-2')">
+            <div class="task-card-title">User authentication flow</div>
+            <div class="task-card-meta">
+              <span class="badge badge-destructive badge-dot">High</span>
+              <span class="badge badge-ghost text-xs">Backend</span>
+              <span>Mike</span>
+            </div>
+          </div>
+          <div class="task-card" onclick="Ranju.dialog.open('task-detail-2')">
+            <div class="task-card-title">Mobile responsive fixes</div>
+            <div class="task-card-meta">
+              <span class="badge badge-success badge-dot">Low</span>
+              <span class="badge badge-ghost text-xs">Frontend</span>
+              <span>Sarah K.</span>
+            </div>
+          </div>
+          <button class="add-task-btn" onclick="Ranju.dialog.open('new-task-dialog')">+ Add task</button>
+        </div>
+      </div>
+
+      <!-- Review -->
+      <div class="board-column">
+        <div class="board-column-header">
+          <span class="board-column-title">Review</span>
+          <span class="board-column-count">1</span>
+        </div>
+        <div class="board-column-cards">
+          <div class="task-card" onclick="Ranju.dialog.open('task-detail-2')">
+            <div class="task-card-title">Payment integration</div>
+            <div class="task-card-meta">
+              <span class="badge badge-destructive badge-dot">High</span>
+              <span class="badge badge-ghost text-xs">Backend</span>
+              <span>Alex</span>
+            </div>
+          </div>
+          <button class="add-task-btn" onclick="Ranju.dialog.open('new-task-dialog')">+ Add task</button>
+        </div>
+      </div>
+
+      <!-- Done -->
+      <div class="board-column">
+        <div class="board-column-header">
+          <span class="board-column-title">Done</span>
+          <span class="board-column-count">2</span>
+        </div>
+        <div class="board-column-cards">
+          <div class="task-card" onclick="Ranju.dialog.open('task-detail-2')" style="opacity:.9">
+            <div class="task-card-title">Database schema design</div>
+            <div class="task-card-meta">
+              <span class="badge badge-success badge-dot">Completed</span>
+              <span class="badge badge-ghost text-xs">Backend</span>
+              <span>Mike</span>
+            </div>
+          </div>
+          <div class="task-card" onclick="Ranju.dialog.open('task-detail-2')" style="opacity:.9">
+            <div class="task-card-title">Landing page design</div>
+            <div class="task-card-meta">
+              <span class="badge badge-success badge-dot">Completed</span>
+              <span class="badge badge-ghost text-xs">Design</span>
+              <span>Sarah K.</span>
+            </div>
+          </div>
+          <button class="add-task-btn" onclick="Ranju.dialog.open('new-task-dialog')">+ Add task</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Task Detail Dialog -->
+  <div class="dialog-overlay" id="task-detail-1" data-state="closed">
+    <div class="dialog" style="position:relative;max-width:480px">
+      <button class="dialog-close" data-dialog-close>&times;</button>
+      <div class="dialog-header">
+        <div class="dialog-title">Implement dark mode toggle</div>
+        <div class="flex gap-2 mt-2">
+          <span class="badge badge-destructive badge-dot">High</span>
+          <span class="badge badge-ghost">Frontend</span>
+        </div>
+      </div>
+      <div class="dialog-body">
+        <p class="text-sm text-muted mb-4">Add a theme toggle in the header that switches between light and dark modes. Should persist preference to localStorage.</p>
+        <div class="flex items-center gap-3 p-3 rounded border">
+          <div class="avatar" style="width:2rem;height:2rem;font-size:.75rem;background:var(--primary);color:white">SK</div>
+          <div>
+            <div class="text-sm font-medium">Sarah Kim</div>
+            <div class="text-xs text-muted">Assigned</div>
+          </div>
+        </div>
+        <div class="text-xs text-muted mt-4">Created Feb 15 — Due Feb 22</div>
+      </div>
+      <div class="dialog-footer">
+        <button class="btn btn-outline btn-sm" data-dialog-close>Close</button>
+        <button class="btn btn-sm" onclick="Ranju.toast({title:'Moved to In Progress',position:'bottom-right'});Ranju.dialog.close('task-detail-1')">Move to In Progress</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Generic Task Detail (for other cards) -->
+  <div class="dialog-overlay" id="task-detail-2" data-state="closed">
+    <div class="dialog" style="position:relative;max-width:480px">
+      <button class="dialog-close" data-dialog-close>&times;</button>
+      <div class="dialog-header">
+        <div class="dialog-title">Task Details</div>
+      </div>
+      <div class="dialog-body">
+        <p class="text-sm text-muted">Task description and details would go here.</p>
+      </div>
+      <div class="dialog-footer">
+        <button class="btn btn-outline btn-sm" data-dialog-close>Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Task Dialog -->
+  <div class="dialog-overlay" id="new-task-dialog" data-state="closed">
+    <div class="dialog" style="position:relative;max-width:480px">
+      <button class="dialog-close" data-dialog-close>&times;</button>
+      <div class="dialog-header">
+        <div class="dialog-title">New Task</div>
+        <div class="dialog-description">Add a task to the board</div>
+      </div>
+      <div class="dialog-body">
+        <div class="field">
+          <label class="label">Title</label>
+          <input type="text" class="input" placeholder="Task name">
+        </div>
+        <div class="field">
+          <label class="label">Description</label>
+          <textarea class="input" placeholder="Optional description" rows="3"></textarea>
+        </div>
+        <div class="field">
+          <label class="label">Priority</label>
+          <div class="flex gap-2">
+            <label class="radio"><input type="radio" name="prio" value="high"><span class="radio-mark"></span> High</label>
+            <label class="radio"><input type="radio" name="prio" value="med" checked><span class="radio-mark"></span> Medium</label>
+            <label class="radio"><input type="radio" name="prio" value="low"><span class="radio-mark"></span> Low</label>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Column</label>
+          <select class="input">
+            <option>To Do</option>
+            <option>In Progress</option>
+            <option>Review</option>
+            <option>Done</option>
+          </select>
+        </div>
+      </div>
+      <div class="dialog-footer">
+        <button class="btn btn-outline" data-dialog-close>Cancel</button>
+        <button class="btn" onclick="Ranju.toast({title:'Task created',variant:'success',position:'bottom-right'});Ranju.dialog.close('new-task-dialog')">Create Task</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../ranju.js"></script>
+  <script>
+    function updateIcon() {
+      document.getElementById('t-icon').textContent = Ranju.theme.current() === 'dark' ? '\u2600' : '\u263E';
+    }
+    updateIcon();
+  </script>
+</body>
+</html>

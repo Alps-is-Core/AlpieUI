@@ -65,6 +65,8 @@ npm install @alps/ranjuui
 | **Full component reference** | [alps-is-core.github.io/RanjuUI](https://alps-is-core.github.io/RanjuUI/) |
 | **SaaS landing page** | [examples/saas-landing.html](https://alps-is-core.github.io/RanjuUI/examples/saas-landing.html) |
 | **Dashboard app** | [examples/dashboard.html](https://alps-is-core.github.io/RanjuUI/examples/dashboard.html) |
+| **Financial dashboard** | [examples/financial-dashboard.html](https://alps-is-core.github.io/RanjuUI/examples/financial-dashboard.html) |
+| **Task board (Kanban)** | [examples/task-board.html](https://alps-is-core.github.io/RanjuUI/examples/task-board.html) |
 
 The docs site has live demos and copy-paste code for every component: buttons, cards, dialogs, forms, tables, toasts, and 35+ more.
 
